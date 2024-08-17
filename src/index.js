@@ -11,11 +11,12 @@ const app = express();
 dotenv.config();
 
 // cors configuration
-app.use(cors(
-    {
-        origin : process.env.CORS_ORIGIN
-    }
-))
+//when I am using cors
+// app.use(cors(
+//     {
+//         origin : process.env.CORS_ORIGIN
+//     }
+// ))
 
 // The express dataPas with body
 app.use(express.json({limit:"5kb"}));
