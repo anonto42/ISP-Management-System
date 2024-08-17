@@ -29,7 +29,7 @@ connectionDB()
 .then(
     app.listen(process.env.PORT || 3500 , ()=>{
     
-        console.log(`Your server is listening at ${process.env.PORT}`);
+        console.log(`Your server is listening at ${process.env.PORT || 3500}`);
     
     })
 )
