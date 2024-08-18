@@ -1,7 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from "dotenv";
-import cors from "cors";
 import adminRouter from './routes/admin.routes.js';
 import connectionDB from './DB/db.js';
 
