@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from "dotenv";
 import adminRouter from './routes/admin.routes.js';
 import connectionDB from './DB/db.js';
+import cors from "cors"; 
 
 const app = express();
 
@@ -9,7 +10,6 @@ const app = express();
 dotenv.config();
 
 // cors configuration
-// when I am using cors
 app.use(cors(
     {
         origin : process.env.CORS_ORIGIN
