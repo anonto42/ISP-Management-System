@@ -4,7 +4,7 @@ import { upload } from '../middlewares/uploadImage.middlewares.js';
 
 const adminRouter = express.Router();
 
-adminRouter.post("/register", register);
+adminRouter.post("/register", upload() , register);
 
 // adminRouter.route("/ami").post(upload);
 
