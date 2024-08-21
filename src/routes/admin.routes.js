@@ -1,5 +1,5 @@
 import express from 'express';
-import { register} from '../controller/admin.controller.js';
+import { register , projectUpload } from '../controller/admin.controller.js';
 import { upload } from '../middlewares/uploadImage.middlewares.js';
 
 const adminRouter = express.Router();
