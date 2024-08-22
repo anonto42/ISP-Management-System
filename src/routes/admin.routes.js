@@ -6,8 +6,7 @@ const adminRouter = express.Router();
 
 adminRouter.post("/register" , register);
 
-adminRouter.post("/uploadImage" , upload.fields({name:"frontImage",maxCount:1}) , projectUpload );
-
-// adminRouter.route("/ami").post(upload);
+// adminRouter.post("/uploadImage" , upload.single({name:"frontImage"}) , projectUpload );
+adminRouter.post("/uploadImage" , upload.fields([{name:"frontImage",maxCount:1}]) , projectUpload );
 
 export default adminRouter
