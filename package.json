@@ -1,7 +1,7 @@
 {
   "name": "main-portfolio-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is my main portfolio backend server",
   "type": "module",
   "main": "index.js",
   "scripts": {
