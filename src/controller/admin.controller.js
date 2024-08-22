@@ -37,13 +37,16 @@ const projectUpload = asyncHendler( async (req,res)=>{
         [title , liveLink , sorceCode].some((e)=>e?.trim() === "" ) 
     ) return res.status(401).json({message:"please enter your all project information"});
     
-    const frontImageTst = req.files?.frontImage[0]?.path;
+    const frontImageTst = req.file?.path;
+    // const frontImageTst = req.file?.frontImage?.path;
 
-    const uploadOnClou = uploadOnCloudinary(frontImageTst);
+    const uploadOnClou = await uploadOnCloudinary(frontImageTst);
 
     console.log(uploadOnClou)
 
     if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
+
+    const frontImage = uploadOnClou.url
 
     const project = await Project.create(
         {
@@ -51,7 +54,7 @@ const projectUpload = asyncHendler( async (req,res)=>{
             liveLink,
             sorceCode,
             // frontImage : frontImageFile.url
-            frontImage : frontImageTst
+            frontImage
         }
     );
 
