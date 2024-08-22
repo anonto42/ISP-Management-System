@@ -20,7 +20,7 @@ app.use(cors(
 // The express dataPas with body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static());
+// app.use(express.static());
 app.use(cookieParser());
 
 // In this line I have done the route connection
