@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import adminRouter from './routes/admin.routes.js';
 import connectionDB from './DB/db.js';
 import cors from "cors"; 
-import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -18,8 +18,10 @@ app.use(cors(
 ))
 
 // The express dataPas with body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static());
+app.use(cookieParser());
 
 // In this line I have done the route connection
 app.use("/api/admin", adminRouter);
