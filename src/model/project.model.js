@@ -2,19 +2,19 @@ import mongoose from "mongoose";
 
 const projectsSchema = new mongoose.Schema({
     title:{
-        type : 'string',
+        type : String,
         required: true
     },
     liveLink:{
-        type : 'string',
+        type : String,
         required: true
     },
     sorceCode:{
-        type : 'string',
+        type : String,
         required: true
     },
     frontImage:{
-        type : 'string',
+        type : String,
         required: true
     }
 },{timestamps:true});
