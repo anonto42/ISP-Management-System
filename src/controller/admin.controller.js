@@ -1,4 +1,5 @@
 import { Admin } from '../model/admin.model.js';
+import MessageModel from '../model/messages.model.js';
 import { Project } from '../model/project.model.js';
 import asyncHendler from '../util/asyncHendler.js';
 import { uploadOnCloudinary } from '../util/cloudnary.js';
@@ -66,5 +67,56 @@ const projectUpload = asyncHendler( async (req,res)=>{
 
 });
 
+const messageCreate = asyncHendler( async (req, res)=>{
 
-export { register , projectUpload };
+    const { name , email , message } = req.body;
+
+    if( 
+        [name, email, message].some( e => e.trim() === "" )
+    ) return res.status(404).json({message:"Please enter your all information"});
+
+    const messageCreate = await MessageModel.create(
+        {
+            name,
+            email,
+            message
+        }
+    );
+
+    if (!messageCreate) return res.status(405).json({message:"Your message is not send"});
+
+    return res.status(201).json({message:"Message created", data:messageCreate});
+ 
+});
+
+const login = asyncHendler( async (req,res)=>{
+    
+    const { email , password } = req.body;
+    
+    if( email === "" && password === "" ) return res.status(401).json({message:"Please fulfill the from"});
+
+    const userGotit = await Admin.findOne({email});
+
+    
+
+});
+
+const getProjects = asyncHendler( async (req,res)=>{
+
+    const projects = await Project.find()
+
+    console.log(projects)
+
+    res.status(200).json(projects)
+});
+
+const getMessage = asyncHendler( async (req,res)=>{
+    
+    const messages = await MessageModel.find();
+
+    res.status(200).json(messages);
+
+});
+
+
+export { register , projectUpload , getProjects , login , messageCreate ,getMessage};
