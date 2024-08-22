@@ -10,7 +10,7 @@ adminRouter.post( "/uploadImage" , upload.single("frontImage") , projectUpload )
 
 adminRouter.post( "/messageSend" , messageCreate );
 
-adminRouter.get( "/login" , login );
+adminRouter.post( "/login" , login );
 
 adminRouter.get( "/getProjecs", getProjects );
 
