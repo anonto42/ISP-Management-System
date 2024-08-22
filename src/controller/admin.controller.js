@@ -89,6 +89,18 @@ const messageCreate = asyncHendler( async (req, res)=>{
  
 });
 
+// GenerateAccesToken
+const generateAccesToken = async ( userID )=> {
+    
+    const user = await Admin.findById(userID);
+
+    if(!user) return null;
+
+    const AccessToken = await user.generateAccesToken();
+
+    return AccessToken;
+};
+
 const login = asyncHendler( async (req,res)=>{
     
     const { email , password } = req.body;
@@ -97,8 +109,30 @@ const login = asyncHendler( async (req,res)=>{
 
     const userGotit = await Admin.findOne({email});
 
-    
+    if(!userGotit) return res.status(400).json({message:"There was not any account by this email address"});
 
+    const passTrueOrFalse = await userGotit.isPasswordCorrect();
+
+    if (!passTrueOrFalse) return res.status(401).json({message:"Your password was not correct"});
+
+    const { AccessToken } = await generateAccesToken(userGotit._id);
+
+    const logindUser = await Admin.findById(userGotit._id);
+
+    const option = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+    .status(222)
+    .cookie("accessToken" , AccessToken , option )
+    .json(
+        {
+            user: logindUser , AccessToken
+        },
+        "User logged in Succesfully"
+    )
 });
 
 const getProjects = asyncHendler( async (req,res)=>{
