@@ -7,7 +7,7 @@ const connectionDB = async ()=>{
 
         const dataBase = await mongoose.connect(`${process.env.MONGOOSE_URI}/${process.env.DB_NAME}`);
 
-        console.log(`Your database connection on ${dataBase.connection.host}`)
+        console.log(`Your database connection on : ${dataBase.connection.host}`)
 
     } catch (error) {
         console.log( "You have some problem on databas" , error);
