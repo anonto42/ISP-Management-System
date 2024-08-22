@@ -8,20 +8,33 @@ import fs from "fs";
     cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
         api_key: process.env.CLOUDINARY_API_KEY, 
-        api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
+        api_secret: process.env.CLOUDINARY_API_SECRET
     });
 });
 
 
 const uploadOnCloudinary = async (LocalFileImageOrVideo) =>{
     try {
-        if(!localFileImageOrVideo) return null;
+        if (!LocalFileImageOrVideo) return null
 
-        const response = await cloudinary.uploader.upload(LocalFileImageOrvideo,{
-            resource_type:"auto"
-        });
+        console.log(LocalFileImageOrVideo)
 
-        return response.url;
+        //upload the file on cloudinary
+
+        // const response = await cloudinary.uploader.upload(LocalFileImageOrVideo, {
+        //     resource_type: "auto"
+        // })
+
+        const response = await cloudinary.uploader.upload(LocalFileImageOrVideo,
+            {
+                resource_type:"auto"
+            }
+        )
+
+        fs.unlinkSync(LocalFileImageOrVideo)
+        console.log(response.url);
+
+        return response;
 
     } catch (error) {
         fs.unlinkSync(LocalFileImageOrVideo);
