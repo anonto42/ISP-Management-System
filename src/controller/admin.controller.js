@@ -43,8 +43,6 @@ const projectUpload = asyncHendler( async (req,res)=>{
 
     const uploadOnClou = await uploadOnCloudinary(frontImageTst);
 
-    console.log(uploadOnClou)
-
     if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
 
     const frontImage = uploadOnClou.url
@@ -169,5 +167,27 @@ const getMessage = asyncHendler( async (req,res)=>{
 
 });
 
+const deleteProjects = asyncHendler( async (req,res)=>{
+    
+    const { title } = req.body;
 
-export { register , projectUpload , getProjects , login , messageCreate , getMessage , logout};
+    const projectFileOnDB = await Project.findOneAndDelete( { title } );
+    
+    if(!projectFileOnDB) return res.status(404).json({ message:"Project not found or your given title was rong"});
+
+    return res.status(200).json({ message:"Delete done" , data: projectFileOnDB })
+} );
+
+const deleteMessage = asyncHendler( async (req,res)=>{
+
+    const { email } = req.body;
+
+    const messageFileOnDB = await MessageModel.findOneAndDelete( { email } );
+    
+    if(!messageFileOnDB) return res.status(404).json({ message:"Message not found or your given email was rong"});
+
+    return res.status(200).json({ message:"Delete done" , data: messageFileOnDB })
+} );
+
+
+export { register , projectUpload , getProjects , login , messageCreate , getMessage , logout , deleteProjects , deleteMessage };
