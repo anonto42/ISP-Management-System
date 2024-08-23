@@ -111,7 +111,7 @@ const login = asyncHendler( async (req,res)=>{
 
     if(!userGotit) return res.status(400).json({message:"There was not any account by this email address"});
 
-    const passTrueOrFalse = await userGotit.isPasswordCorrect();
+    const passTrueOrFalse = await userGotit.isPasswordCorrect(password);
 
     if (!passTrueOrFalse) return res.status(401).json({message:"Your password was not correct"});
 
@@ -135,6 +135,23 @@ const login = asyncHendler( async (req,res)=>{
     )
 });
 
+const logout = asyncHendler( async (req,res)=>{
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+    
+    return res
+    .status(222)
+    .clearCookie("accessToken", options)
+    .json(
+        {
+            message: "User logged out Succesfully"
+        }
+    );
+});
+
 const getProjects = asyncHendler( async (req,res)=>{
 
     const projects = await Project.find()
@@ -153,4 +170,4 @@ const getMessage = asyncHendler( async (req,res)=>{
 });
 
 
-export { register , projectUpload , getProjects , login , messageCreate ,getMessage};
+export { register , projectUpload , getProjects , login , messageCreate , getMessage , logout};
