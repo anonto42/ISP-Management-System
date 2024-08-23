@@ -17,7 +17,7 @@ adminRouter.get( "/getProjecs", getProjects );
 adminRouter.get( "/getMessages" , getMessage );
 
 // delete routes
-adminRouter.delete("/deleteProject", deleteProjects );
+adminRouter.post("/deleteProject", deleteProjects );
 
 adminRouter.delete("/deleteMessage" , deleteMessage );
 
