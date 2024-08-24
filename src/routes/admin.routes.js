@@ -19,7 +19,7 @@ adminRouter.get( "/getMessages" , getMessage );
 // delete routes
 adminRouter.post("/deleteProject", deleteProjects );
 
-adminRouter.delete("/deleteMessage" , deleteMessage );
+adminRouter.post("/deleteMessage" , deleteMessage );
 
 
 // secout routes
