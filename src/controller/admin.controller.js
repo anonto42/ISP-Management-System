@@ -173,7 +173,7 @@ const deleteProjects = asyncHendler( async (req,res)=>{
     
     if(!projectFileOnDB) return res.status(404).json({ message:"Project not found or your given title was rong"});
 
-    return res.status(200).json({ message:"Delete done" , data: projectFileOnDB })
+    return res.status(200).json({ message:"your message deleted , now refresh your page" , data: projectFileOnDB })
 } );
 
 const deleteMessage = asyncHendler( async (req,res)=>{
@@ -184,7 +184,7 @@ const deleteMessage = asyncHendler( async (req,res)=>{
     
     if(!messageFileOnDB) return res.status(404).json({ message:"Message not found or your given email was rong"});
 
-    return res.status(200).json({ message:"Delete done" , data: messageFileOnDB })
+    return res.status(200).json({ message:"your message deleted , now refresh your page" , data: messageFileOnDB })
 } );
 
 
