@@ -152,9 +152,7 @@ const logout = asyncHendler( async (req,res)=>{
 
 const getProjects = asyncHendler( async (req,res)=>{
 
-    const projects = await Project.find()
-
-    console.log(projects)
+    const projects = await Project.find();
 
     res.status(200).json(projects)
 });
