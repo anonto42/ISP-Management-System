@@ -83,7 +83,7 @@ const messageCreate = asyncHendler( async (req, res)=>{
 
     if (!messageCreate) return res.status(405).json({message:"Your message is not send"});
 
-    return res.status(201).json({message:"Message created", data:messageCreate});
+    return res.status(201).json({message:"Message send", data:messageCreate});
  
 });
 
