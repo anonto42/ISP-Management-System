@@ -41,6 +41,8 @@ const projectUpload = asyncHendler( async (req,res)=>{
     const frontImageTst = req.file?.path;
     // const frontImageTst = req.file?.frontImage?.path;
 
+    console.log(frontImageTst)
+
     const uploadOnClou = await uploadOnCloudinary(frontImageTst);
 
     if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
@@ -123,13 +125,12 @@ const login = asyncHendler( async (req,res)=>{
     }
 
     return res
-    .status(222)
     .cookie("accessToken" , AccessToken , option )
+    .status(200)
     .json(
         {
             user: logindUser , AccessToken
-        },
-        "User logged in Succesfully"
+        }
     )
 });
 
