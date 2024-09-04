@@ -23,6 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static());
 app.use(cookieParser());
 
+app.get('/',(req,res)=>{
+    res.send("it's work")
+})
+
 // In this line I have done the route connection
 app.use("/api/admin", adminRouter);
 
