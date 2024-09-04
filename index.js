@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from "dotenv";
-import adminRouter from './routes/admin.routes.js';
-import connectionDB from './DB/db.js';
+import adminRouter from './src/routes/admin.routes.js';
+import connectionDB from './src/DB/db.js';
 import cors from "cors"; 
 import cookieParser from 'cookie-parser';
 
