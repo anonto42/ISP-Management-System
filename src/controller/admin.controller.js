@@ -39,13 +39,10 @@ const projectUpload = asyncHendler( async (req,res)=>{
     ) return res.status(401).json({message:"please enter your all project information"});
     
     const frontImageTst = req.file?.path;
-    // const frontImageTst = req.file?.frontImage?.path;
-
-    console.log(frontImageTst)
 
     const uploadOnClou = await uploadOnCloudinary(frontImageTst);
 
-    if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
+    // if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
 
     const frontImage = uploadOnClou.url
 
@@ -54,8 +51,7 @@ const projectUpload = asyncHendler( async (req,res)=>{
             title,
             liveLink,
             sorceCode,
-            // frontImage : frontImageFile.url
-            frontImage
+            // frontImage
         }
     );
 
