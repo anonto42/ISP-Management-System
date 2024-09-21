@@ -42,7 +42,7 @@ const projectUpload = asyncHendler( async (req,res)=>{
 
     const uploadOnClou = await uploadOnCloudinary(frontImageTst);
 
-    // if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
+    if(!uploadOnClou) return res.status(500).json({message:"your file was not uploaded"})
 
     const frontImage = uploadOnClou.url
 
@@ -51,7 +51,7 @@ const projectUpload = asyncHendler( async (req,res)=>{
             title,
             liveLink,
             sorceCode,
-            // frontImage
+            frontImage
         }
     );
 
@@ -151,7 +151,7 @@ const getProjects = asyncHendler( async (req,res)=>{
 
     const projects = await Project.find();
 
-    res.status(200).json(projects)
+    res.status(200).json(projects.reverse())
 });
 
 const getMessage = asyncHendler( async (req,res)=>{
