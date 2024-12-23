@@ -106,6 +106,7 @@ const login = asyncHendler( async (req,res)=>{
     if (token != process.env.TOKEN) return res.status(401).json({message:"Please inter the valid token"});
 
     return res
+    .cookie("logg", { token } , { httpOnly: true, secure: true })
     .status(200)
     .json(
         {
@@ -120,10 +121,12 @@ const logout = asyncHendler( async (req,res)=>{
         httpOnly: true,
         secure: true
     }
+
+    const token = ""
     
     return res
     .status(222)
-    .clearCookie("accessToken", options)
+    .cookie("logg", { token } , options)
     .json(
         {
             message: "User logged out Succesfully"

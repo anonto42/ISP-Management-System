@@ -25,7 +25,7 @@ adminRouter.post("/deleteMessage" , deleteMessage );
 // secout routes
 adminRouter.post( "/login" , login );
 
-adminRouter.post("/logout", verifyJWT , logout)
+adminRouter.post("/logout" , logout)
 
 
 export default adminRouter;
