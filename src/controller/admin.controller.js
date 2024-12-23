@@ -99,33 +99,17 @@ const generateAccesToken = async ( userID )=> {
 
 const login = asyncHendler( async (req,res)=>{
     
-    const { email , password } = req.body;
+    const { token  } = req.body;
     
-    if( email === "" && password === "" ) return res.status(401).json({message:"Please fulfill the from"});
+    if( token === "" ) return res.status(401).json({message:"Please inter the token"});
 
-    const userGotit = await Admin.findOne({email});
-
-    if(!userGotit) return res.status(400).json({message:"There was not any account by this email address"});
-
-    const passTrueOrFalse = await userGotit.isPasswordCorrect(password);
-
-    if (!passTrueOrFalse) return res.status(401).json({message:"Your password was not correct"});
-
-    const { AccessToken } = await generateAccesToken(userGotit._id);
-
-    const logindUser = await Admin.findById(userGotit._id);
-
-    const option = {
-        httpOnly: true,
-        secure: true
-    }
+    if (token != process.env.TOKEN) return res.status(401).json({message:"Please inter the valid token"});
 
     return res
-    .cookie("accessToken" , AccessToken , option )
     .status(200)
     .json(
         {
-            user: logindUser , AccessToken
+            message: "User logged in Succesfully"
         }
     )
 });
