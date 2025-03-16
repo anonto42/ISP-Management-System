@@ -1,7 +1,19 @@
 @import "tailwindcss";
 
 body {
-  background: linear-gradient(45deg, #9b85cf, #7e29ec);;
+  background: linear-gradient(45deg, #9b85cf, #7e29ec);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components{
+  .inp-box-login{
+    @apply w-[250px] md:w-[350px] h-[50px] bg-[white] mb-5 overflow-clip shadow shadow-[#1f1f1f5e] rounded-xl
+  }
+  .inp-login{
+    @apply w-full h-[50px] px-3 outline-none placeholder:font-semibold font-medium
+  }
+  .btn{
+    @apply px-5 py-2 bg-[#1418d1] text-white rounded-2xl text-xl active:scale-95 duration-100 ease-in-out shadow shadow-[#1f1f1f5e]
+  }
 }
