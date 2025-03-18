@@ -18,7 +18,7 @@ interface selection{
 const SideBar = () => {
     const [obg,setObg] = useState<selection>({index:1,innerIndex:1})
   return (
-    <section className='h-svh w-[80px] bg-[#747dad] shadow-[0px_0px_10px_rgba(12,12,12,0.3)]'>
+    <section className='h-svh w-[80px] md:w-[130px] bg-[#747dad] shadow-[0px_0px_10px_rgba(12,12,12,0.3)] absolute z-10'>
         <div className='w-full h-full'>
             <div 
                 onClick={()=>{
