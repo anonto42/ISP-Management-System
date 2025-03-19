@@ -17,6 +17,6 @@ body {
     @apply px-5 py-2 bg-[#1418d1] text-white rounded-2xl text-xl active:scale-95 duration-100 ease-in-out shadow shadow-[#1f1f1f5e]
   }
   .icon-box{
-    @apply w-full py-3 text-3xl flex justify-center items-center cursor-pointer text-[#dadef5] border-b-2 border-transparent
+    @apply w-full py-3 text-3xl flex flex-col justify-around items-center cursor-pointer text-[#dadef5] border-b-2 border-transparent px-2 pl-1 relative
   }
 }
