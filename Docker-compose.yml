@@ -1,0 +1,15 @@
+version: '0.0.1'
+services:
+  nextjs:
+    build: .
+    container_name: ISP-MANAGEMENT-SYSTEM
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      -"80:80"
+    volumes:
+      -./nginx/default.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nextjs
