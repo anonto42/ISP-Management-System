@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="flex w-full h-full items-center justify-center bg-gradient-to-r from-[#111123] to-[#18183a] text-white">
+    <div className="flex w-full h-full items-center justify-center bg-gradient-to-r from-[#7e29ec] to-[#9b85cf] text-white">
       <div className="flex flex-col items-center space-y-6">
         {/* Circular Progress Loader */}
         <div className="relative flex items-center justify-center">
