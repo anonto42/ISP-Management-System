@@ -3,6 +3,7 @@ import React, { SetStateAction, useState } from 'react';
 import { selection } from '../SideBar';
 import { GoChevronDown, GoChevronRight } from 'react-icons/go';
 import { IconType } from 'react-icons';
+import Link from 'next/link';
 
 interface InputFromMainPage{
     Icon: IconType;
@@ -62,23 +63,26 @@ const SideBareIconBox = (data:InputFromMainPage) => {
         {
             bar?(
                 <div 
-                    className={`absolute lg:hidden ease-in-out duration-300 w-[150px] ${data.state.index !== data.index? "h-0":""} bg-[#40d4b43a] top-12 left-21 shadow shadow-[#0000006c] rounded-sm overflow-clip`}
+                    className={`absolute lg:hidden ease-in-out duration-300 w-[150px] ${data.state.index !== data.index? "h-0":""} bg-[#968bfc] top-12 left-21 shadow shadow-[#0000006c] rounded-sm overflow-clip`}
                     style={{
                         height: data.state.index === data.index ? `${mobileViewSecondaryBarHeight}px` : '0',
                     }}
                     >
                     {
                         data.SecondarySections.map((item,index)=>{
-                            return <h4 
-                                key={index}
-                                onClick={()=>{
-                                    data.setElementState({index:data.index,innerIndex:index, name:item});
-                                    setTimeout(()=>{
-                                        setBar(false)
-                                    },2000)
-                                }}
-                                className={`text-lg text-center py-2 border-b duration-75 ease-linear active:bg-[#0000004b] ${ data.state.innerIndex === index?"bg-[#2f4a8fcb]":"bg-transparent" }`}
-                                >{item}</h4>
+                           const url = item.toLocaleLowerCase().split(" ").join("")
+                            return <Link href={`/admin/${data.Title.toLocaleLowerCase()}/${url}`}>
+                                <h4 
+                                    key={index}
+                                    onClick={()=>{
+                                        data.setElementState({index:data.index,innerIndex:index, name:item});
+                                        setTimeout(()=>{
+                                            setBar(false)
+                                        },200)
+                                    }}
+                                        className={`text-lg text-center py-2 border-b duration-75 ease-linear active:bg-[#0000004b] ${ data.state.innerIndex === index?"bg-[#2f4a8fcb]":"bg-transparent" }`}
+                                    >{item}</h4>
+                            </Link>
                         })
                     }
                 </div>
