@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-svh`}
       >
-        <div className="relative w-full h-svh">
+        <div className="relative w-full h-svh overflow-y-auto">
             <NaveBar/>
             <SideBar/>
             <div className='w-full h-full pt-[55px] pl-[80px] lg:pl-[210px]'>
