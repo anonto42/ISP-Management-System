@@ -3,7 +3,7 @@ import React from 'react'
 
 const DeshboardInfoItem = ({data}:{data:renderData}) => {
   return (
-    <div className='p-6 w-auto h-auto bg-[#efecec] text-black'>
+    <div className='p-6 w-auto h-auto bg-[#efecec] text-black shadow-md'>
         <div className='flex gap-4 items-center'>
             <div
                 style={{
