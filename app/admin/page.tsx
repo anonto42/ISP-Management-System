@@ -14,6 +14,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import DeshboardInfoItem from '@/components/admin/Boxes/DeshboardInfoItem';
 import Graph from '@/components/graph/Graph';
 import SystemInfo from '@/components/admin/Boxes/SystemInfo';
+import PaginationComponent, { user } from '@/components/paginate/Paginate';
 
 export interface renderData{
   icon:IconType;
@@ -82,9 +83,18 @@ const dataObject:renderData[] = [
   },
 ]
 
+
+const usersData:user[] = [
+  { id: 1, name: "John Doe", userName:"jodeo",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
+  { id: 2, name: "Sohidul islam", userName:"anonto",password:"anonto1212",mobile:"01990579274",expire:"10-02-2025" }, 
+  { id: 3, name: "Jon kori", userName:"johan",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
+  { id: 4, name: "Pori moni", userName:"pori",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
+  { id: 5, name: "Jannat jannatul", userName:"jan12",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
+];
+
 const AdminDeshboard = () => {
   return (
-    <div className='w-full h-full overflow-y-auto text-white'>
+    <div className='w-full h-full text-white'>
 
       <section className='flex flex-col md:flex-row justify-between items-center py-4 w-full px-4 xl:mb-[40px]'>
         <div className='text-center md:text-start'>
@@ -112,6 +122,18 @@ const AdminDeshboard = () => {
       <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 gap-4 grid grid-cols-1 lg:grid-cols-2'>
         <Graph/>
         <SystemInfo/>
+      </section>
+
+      <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 pb-10'>
+        <PaginationComponent 
+          allData={usersData}
+          action={{
+            delete:true,
+            edite: true
+          }}
+          paginateTitle='Bill paid today'
+          fields={["User ID","Full name","User name","Password","Mobile","Expire"]}
+        />
       </section>
 
     </div>
