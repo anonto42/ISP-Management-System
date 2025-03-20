@@ -10,7 +10,6 @@ The **ISP Management System** is a web-based application designed to help Intern
 - **Billing & Invoicing**: Generate customer invoices, track payments, and manage billing cycles.
 - **Service Configuration**: Configure internet plans, bandwidth limits, and customer usage.
 - **Usage Monitoring**: Track data usage and bandwidth consumption for each customer.
-- **Support System**: Enable customers to open support tickets and track their status.
 - **Admin Panel**: Admins can manage users, view system metrics, and configure ISP operations.
 
 ## Tech Stack
