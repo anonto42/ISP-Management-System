@@ -28,6 +28,8 @@ const SideBareIconBox = (data:InputFromMainPage) => {
            onClick={()=>{
                 data.setElementState({index:data.index,innerIndex:undefined});
                 setBar(true)
+                if (data.Title.toLocaleLowerCase() == "deshboard") return window.location.href = `/admin`
+                if (data.SecondarySections.length <= 0) return window.location.href = `/admin/${data.Title.toLocaleLowerCase()}`;
             }}
         >
             <div className='flex items-center'>
@@ -49,15 +51,17 @@ const SideBareIconBox = (data:InputFromMainPage) => {
                 paddingBottom: data.SecondarySections.length > 0 && data.state.index === data.index ? "16px":"0"
             }}
             >
-            {data.SecondarySections.map((item, index) => (
-                <h4
-                key={index}
-                onClick={() => data.setElementState({ index: data.index, innerIndex: index ,name:item})}
-                className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${data.state.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
-                >
-                {item}
-                </h4>
-            ))}
+                {data.SecondarySections.map((item, index) => (
+                    <Link href={`/admin/${data.Title.toLocaleLowerCase()}/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                        <h4
+                            key={index}
+                            onClick={() => data.setElementState({ index: data.index, innerIndex: index ,name:item})}
+                            className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${data.state.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
+                            >
+                            {item}
+                        </h4>
+                    </Link>
+                ))}
         </div>
         {/* BarFor mobile view */}
         {
@@ -70,8 +74,7 @@ const SideBareIconBox = (data:InputFromMainPage) => {
                     >
                     {
                         data.SecondarySections.map((item,index)=>{
-                           const url = item.toLocaleLowerCase().split(" ").join("")
-                            return <Link href={`/admin/${data.Title.toLocaleLowerCase()}/${url}`}>
+                            return <Link href={`/admin/${data.Title.toLocaleLowerCase()}/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                 <h4 
                                     key={index}
                                     onClick={()=>{
