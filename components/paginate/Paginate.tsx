@@ -7,6 +7,7 @@ export interface acction{
   delete?: boolean;
   edite?: boolean;
   view?: boolean;
+  block?: boolean;
 }
 
 interface comonAttrivoutes{

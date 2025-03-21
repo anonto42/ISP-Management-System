@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { MdDeleteOutline } from "react-icons/md";
+import { MdBlock, MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { acction } from './Paginate';
@@ -52,6 +52,14 @@ const SingelShowItem = <T extends {}>({data,collums,acction}:props<T>) => {
                     title='Edite'
                     className='w-[30px] h-[30px] bg-[#d7ffd3] flex justify-center items-center text-xl text-[#00ff15] rounded-lg shadow'>
                     <FaRegPenToSquare />
+                </div> :<></>
+            }
+            {
+                acction.block?<div 
+                    onClick={()=>editeHanaler()}
+                    title='Edite'
+                    className='w-[30px] h-[30px] bg-[#F79965] flex justify-center items-center text-xl text-[#D63613] rounded-lg shadow'>
+                    <MdBlock />
                 </div> :<></>
             }
             
