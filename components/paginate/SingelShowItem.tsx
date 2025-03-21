@@ -25,7 +25,7 @@ const SingelShowItem = <T extends {}>({data,collums,acction}:props<T>) => {
 
         {Object.values(data).map((value, index) => (
             <h4 key={index} className='text-sm font-extralight'>
-                {value}
+                {value as string}
             </h4>
         ))}
 
