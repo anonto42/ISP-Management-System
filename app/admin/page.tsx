@@ -14,7 +14,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import DeshboardInfoItem from '@/components/admin/Boxes/DeshboardInfoItem';
 import Graph from '@/components/graph/Graph';
 import SystemInfo from '@/components/admin/Boxes/SystemInfo';
-import PaginationComponent, { user } from '@/components/paginate/Paginate';
+import PaginationComponent from '@/components/paginate/Paginate';
 
 export interface renderData{
   icon:IconType;
@@ -83,13 +83,21 @@ const dataObject:renderData[] = [
   },
 ]
 
+interface user {
+  id: string;
+  name: string;
+  userName:string;
+  password:string;
+  mobile:string;
+  expire:string;
+}
 
 const usersData:user[] = [
-  { id: 1, name: "John Doe", userName:"jodeo",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
-  { id: 2, name: "Sohidul islam", userName:"anonto",password:"anonto1212",mobile:"01990579274",expire:"10-02-2025" }, 
-  { id: 3, name: "Jon kori", userName:"johan",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
-  { id: 4, name: "Pori moni", userName:"pori",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
-  { id: 5, name: "Jannat jannatul", userName:"jan12",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
+  { id: "1", name: "John Doe", userName:"jodeo",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
+  { id: "2", name: "Sohidul islam", userName:"anonto",password:"anonto1212",mobile:"01990579274",expire:"10-02-2025" }, 
+  { id: "3", name: "Jon kori", userName:"johan",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
+  { id: "4", name: "Pori moni", userName:"pori",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
+  { id: "5", name: "Jannat jannatul", userName:"jan12",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
 ];
 
 const AdminDeshboard = () => {
@@ -125,7 +133,7 @@ const AdminDeshboard = () => {
       </section>
 
       <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 pb-10'>
-        <PaginationComponent 
+        <PaginationComponent<user>
           allData={usersData}
           action={{
             delete:true,
