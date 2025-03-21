@@ -3,15 +3,15 @@ import React from 'react';
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
-import { acction, user } from './Paginate';
+import { acction } from './Paginate';
 
-interface props{
-    data:user;
+interface props<T>{
+    data:T;
     collums:number;
     acction:acction;
 }
 
-const SingelShowItem = ({data,collums,acction}:props) => {
+const SingelShowItem = <T extends {}>({data,collums,acction}:props<T>) => {
 
     const deleteHanaler=():void=>{}
     const editeHanaler=():void=>{}

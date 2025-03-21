@@ -3,29 +3,30 @@ import Link from "next/link";
 import React, { useState } from "react";
 import SingelShowItem from "./SingelShowItem";
 
-export interface user {
-  id: number;
-  name: string;
-  userName:string;
-  password:string;
-  mobile:string;
-  expire:string;
-}
-
 export interface acction{
   delete?: boolean;
   edite?: boolean;
   view?: boolean;
 }
 
-interface props{
+interface comonAttrivoutes{
+  id: string;
+}
+
+interface props<T>{
   action:acction;
   paginateTitle:string;
   fields:string[];
-  allData:user[]
+  allData:T[]
 }
 
-const PaginationComponent = ({paginateTitle,fields,action,allData}:props) => {
+const PaginationComponent = <T extends comonAttrivoutes>(
+  {
+    paginateTitle,
+    fields,
+    action,
+    allData
+  }:props<T>) => {
 
   const [search, setSearch] = useState(""); // State for search input
   const [itemsPerPage, setItemsPerPage] = useState(5); // State for items per page
@@ -36,7 +37,7 @@ const PaginationComponent = ({paginateTitle,fields,action,allData}:props) => {
   //   user.name.toLowerCase().includes(search.toLowerCase())
   // );
   const filteredUsers = allData.filter(user =>
-    user.id.toString().includes(search.toString().toLowerCase())
+    user.id.toString().toLocaleLowerCase().includes(search.toString().toLowerCase())
   );
 
   // Get the current page's users based on itemsPerPage
@@ -113,9 +114,7 @@ const PaginationComponent = ({paginateTitle,fields,action,allData}:props) => {
             }
             <h2 className="font-semibold">{"Action"}</h2>
           </div>
-
-
-            {currentUsers.map((user,index) => (<SingelShowItem 
+            {currentUsers.map((user,index) => (<SingelShowItem
                 key={index}
                 data={user} 
                 collums={fields.length+1}
