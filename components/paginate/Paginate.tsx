@@ -18,7 +18,8 @@ interface props<T>{
   action:acction;
   paginateTitle:string;
   fields:string[];
-  allData:T[]
+  allData:T[];
+  addUserButton:boolean
 }
 
 const PaginationComponent = <T extends comonAttrivoutes>(
@@ -26,7 +27,8 @@ const PaginationComponent = <T extends comonAttrivoutes>(
     paginateTitle,
     fields,
     action,
-    allData
+    allData,
+    addUserButton
   }:props<T>) => {
 
   const [search, setSearch] = useState(""); // State for search input
@@ -64,10 +66,13 @@ const PaginationComponent = <T extends comonAttrivoutes>(
       <div className="w-full min-w-[800px] bg-[#EFECEC] text-black p-6 shadow-md">
         <div className="mb-4 flex w-full justify-between border-b border-[#d1d1d1b9]">
           <h1 className="font-semibold text-xl pb-2 mb-4 text-start">{paginateTitle}</h1>
-          <Link href={""} >
-            <button className="px-4 py-2 shadow rounded-lg bg-blue-600 font-semibold text-white">Add New User</button>
-          </Link>
-        </div>
+            {
+              addUserButton?<Link href={"/admin/customers/addnew"} >
+              <button className="px-4 py-2 shadow rounded-lg bg-blue-600 font-semibold text-white">Add New User</button>
+            </Link>:<></>
+            }
+          </div>
+          
 
         <div className="flex justify-between items-center mb-4 gap-4">
 
