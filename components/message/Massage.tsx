@@ -5,8 +5,10 @@ import { BsSend } from 'react-icons/bs'
 import { IoMdClose } from 'react-icons/io'
 import Loader from '../loader/Loader'
 
-const Massage = ({isSendAll}:{isSendAll:boolean}) => {
-    const [loading,setLoading] = useState(false);
+const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
+    const [loading,setLoading] = useState<boolean>(false);
+    const [to,setTo] = useState<string>("");
+    const [message,setMessage] = useState<string>("");
 
     const handelSubmit = async ()=>{
         try {
@@ -39,10 +41,13 @@ const Massage = ({isSendAll}:{isSendAll:boolean}) => {
               <input 
                 type="text"
                 placeholder='To:'
-                value={isSendAll?"Send to All":10}
+                value={isSendAll?"Send to All":to}
+                onChange={e => setTo( e.target.value )}
                 className={`w-full border px-3 py-2 border-[#c4c4c4] bg-white outline-cyan-200 mb-3`}
               />
               <textarea 
+                value={message}
+                onChange={e => setMessage( e.target.value )}
                 placeholder='Massage'
                 className='w-full border px-3 py-2 border-[#c4c4c4] bg-white outline-cyan-200 min-h-[300px]'
               />
