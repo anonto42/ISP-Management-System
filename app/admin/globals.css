@@ -28,4 +28,7 @@ body {
   .lavel_for_Input{
     @apply text-lg w-[50%] sm:text-center
   }
+  ._btn_{
+    @apply px-4 py-1 flex items-center gap-1 text-white font-semibold active:scale-95 duration-100 ease-linear shadow-sm
+  }
 }
