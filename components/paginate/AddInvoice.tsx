@@ -171,12 +171,12 @@ export function AddNewCount({
 }) {
 
     return(
-        <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-[50%] shadow-[#0000005d] shadow-[0px_0px_60px] bg-[#ffffff] rounded-xl sm:w-[450px]">
+        <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-[50%] shadow-[#0000005d] shadow-[0px_0px_60px] bg-[#ffffff] rounded-xl sm:w-[600px] md:min-w-[450px] max-w-[700px]">
             <div className="p-4 w-full h-full">
                 <h1
                     className="text-xl font-semibold border-b border-[#e2e2e2] pb-2"
                 >Add new</h1>
-                <div className="grid gap-4 py-4">
+                <div className="grid gap-4 py-4 max-w-[500px] mx-auto">
                     <div className="add_item_inp_box">
                         <h3 className="">Amount (Taka)</h3>
                         <input
@@ -202,7 +202,7 @@ export function AddNewCount({
                             type="text" />
                     </div>
                 </div>
-                <div className="flex justify-around">
+                <div className="flex justify-around mt-3">
                     <button 
                         onClick={()=>setAddComponent(false)}
                         className="_btn_ bg-red-200 text-red-700 rounded-sm">Close</button>
