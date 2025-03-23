@@ -31,4 +31,13 @@ body {
   ._btn_{
     @apply px-4 py-1 flex items-center gap-1 text-white font-semibold active:scale-95 duration-100 ease-linear shadow-sm
   }
+  .add_item_inp_box{
+    @apply w-full h-[50px] pr-3 flex items-center justify-between
+  }
+  .add_item_inp{
+    @apply max-w-[300px] sm:w-[70%] w-[150px] border h-full rounded-xl px-4 border-[#c0c0c0] outline-[#c89dff]
+  }
+  .set_inp_{
+    @apply bg-[#f3f3f3] border px-3 py-2 text-lg outline-[#bbf9fd] rounded-lg border-[#c4c4c4]
+  }
 }
