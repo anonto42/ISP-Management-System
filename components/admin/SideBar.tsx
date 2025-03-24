@@ -78,9 +78,9 @@ const SideBar = () => {
                     }}
                     >
                         {["Live","PPPoE Secrect"].map((item, index) => (
-                            <Link href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
+                                    
                                     onClick={() => setSection({ index: 1, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -99,9 +99,9 @@ const SideBar = () => {
                             >
                             {
                                 ["Live","PPPoE Secrect"].map((item,index)=>{
-                                    return <Link href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link key={index} href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
+                                           
                                             onClick={()=>{
                                                 setSection({index:1,innerIndex:index, name:item});
                                                 setTimeout(()=>{
@@ -149,9 +149,8 @@ const SideBar = () => {
                     }}
                     >
                         {["All","Add new"].map((item, index) => (
-                            <Link href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
                                     onClick={() => setSection({ index: 2, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -170,9 +169,8 @@ const SideBar = () => {
                             >
                             {
                                 ["All","Add new"].map((item,index)=>{
-                                    return <Link href={`/admin/customers/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link key={index} href={`/admin/customers/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
                                             onClick={()=>{
                                                 setSection({index:2,innerIndex:index, name:item});
                                                 setTimeout(()=>{
@@ -241,9 +239,9 @@ const SideBar = () => {
                     }}
                     >
                         {["All","individual"].map((item, index) => (
-                            <Link href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
+                                   
                                     onClick={() => setSection({ index: 4, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -262,9 +260,9 @@ const SideBar = () => {
                             >
                             {
                                 ["All","Individual"].map((item,index)=>{
-                                    return <Link href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link key={index} href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
+                                           
                                             onClick={()=>{
                                                 setSection({index:4,innerIndex:index, name:item});
                                                 setTimeout(()=>{
@@ -312,9 +310,9 @@ const SideBar = () => {
                     }}
                     >
                         {["Income","Expense","Stuff"].map((item, index) => (
-                            <Link href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
+                                   
                                     onClick={() => setSection({ index: 5, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -333,9 +331,9 @@ const SideBar = () => {
                             >
                             {
                                 ["Income","Expense","Stuff"].map((item,index)=>{
-                                    return <Link href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link  key={index} href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
+                                          
                                             onClick={()=>{
                                                 setSection({index:5,innerIndex:index, name:item});
                                                 setTimeout(()=>{
@@ -404,9 +402,9 @@ const SideBar = () => {
                     }}
                     >
                         {["Add New","View","Top-Up"].map((item, index) => (
-                            <Link href={`/admin/resellers/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/resellers/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
+                                   
                                     onClick={() => setSection({ index: 7, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -425,9 +423,9 @@ const SideBar = () => {
                             >
                             {
                                 ["Add New","View","Top-Up"].map((item,index)=>{
-                                    return <Link href={`/admin/resellers/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link key={index} href={`/admin/resellers/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
+                                           
                                             onClick={()=>{
                                                 setSection({index:7,innerIndex:index, name:item});
                                                 setTimeout(()=>{
@@ -475,9 +473,9 @@ const SideBar = () => {
                     }}
                     >
                         {["Config","User Portal"].map((item, index) => (
-                            <Link href={`/admin/settings/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/settings/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
-                                    key={index}
+                                   
                                     onClick={() => setSection({ index: 8, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
                                     >
@@ -496,9 +494,9 @@ const SideBar = () => {
                             >
                             {
                                 ["Config","User Portal"].map((item,index)=>{
-                                    return <Link href={`/admin/settings/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link key={index} href={`/admin/settings/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
-                                            key={index}
+                                           
                                             onClick={()=>{
                                                 setSection({index:8,innerIndex:index, name:item});
                                                 setTimeout(()=>{

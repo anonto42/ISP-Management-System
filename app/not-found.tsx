@@ -9,7 +9,7 @@ const NotFound = () => {
           404
         </h1>
         <p className="text-2xl text-gray-800 mt-4">Oops! Page not found.</p>
-        <p className="text-gray-600 mt-2">We couldn't find the page you were looking for.</p>
+        <p className="text-gray-600 mt-2">We couldn&apos;t find the page you were looking for.</p>
         <Link href="/">
           <div className="mt-6 inline-block px-6 py-3 text-white bg-gradient-to-r from-[#8030EA] to-[#9B84D0] rounded-lg hover:from-[#9B84D0] hover:to-[#8030EA] transition duration-300">
             Go back to Home

@@ -141,6 +141,8 @@ const AdminDeshboard = () => {
           }}
           paginateTitle='Bill paid today'
           fields={["User ID","Full name","User name","Password","Mobile","Expire"]}
+          addUserButton
+          key={"Deshboard for admin main home page"}
         />
       </section>
 

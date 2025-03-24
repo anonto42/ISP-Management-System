@@ -11,7 +11,8 @@ interface props<T>{
     acction:acction;
 }
 
-const SingelShowItem = <T extends {}>({data,collums,acction}:props<T>) => {
+
+const SingelShowItem = <T extends object>({data,collums,acction}:props<T>) => {
 
     const deleteHanaler=():void=>{}
     const editeHanaler=():void=>{}
