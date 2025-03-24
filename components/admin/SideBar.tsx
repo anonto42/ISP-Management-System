@@ -27,7 +27,9 @@ const SideBar = () => {
         <div className='w-full h-full'>
         
             {/* Deshboard */}
-            <div className={
+            <div 
+                key={"Deshboard"}
+                className={
                 section.index === 0? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <Link href={"/admin"}>
@@ -46,7 +48,9 @@ const SideBar = () => {
             </div>
 
             {/* Server */}
-            <div className={
+            <div 
+                key={"Server"}
+                className={
                 section.index === 1? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -115,7 +119,9 @@ const SideBar = () => {
             </div>
 
             {/* Customers */}
-            <div className={
+            <div 
+                key={"Customers"}
+                className={
                 section.index === 2? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -184,7 +190,9 @@ const SideBar = () => {
             </div>
 
             {/* Billing */}
-            <div className={
+            <div 
+                key={"Billing"}
+                className={
                 section.index === 3? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <Link href={"/admin/billing"}>
@@ -203,7 +211,9 @@ const SideBar = () => {
             </div>
 
             {/* Message */}
-            <div className={
+            <div 
+                key={"Message"}
+                className={
                 section.index === 4? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -272,7 +282,9 @@ const SideBar = () => {
             </div>
 
             {/* Income */}
-            <div className={
+            <div
+                key={"Income"} 
+                className={
                 section.index === 5? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -341,7 +353,9 @@ const SideBar = () => {
             </div>
 
             {/* Payment */}
-            <div className={
+            <div
+                key={"Payment"} 
+                className={
                 section.index === 6? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <Link href={"/admin/payment"}>
@@ -360,7 +374,9 @@ const SideBar = () => {
             </div>
 
             {/* Resellers */}
-            <div className={
+            <div 
+                key={"Resellers"}
+                className={
                 section.index === 7? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -429,7 +445,9 @@ const SideBar = () => {
             </div>
 
             {/* Settings */}
-            <div className={
+            <div 
+                key={"Settings"}
+                className={
                 section.index === 8? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
             }>
                 <div className='w-full h-full flex justify-between pl-4'
@@ -496,8 +514,6 @@ const SideBar = () => {
                     ):(<></>)
                 }
             </div>
-            
-            
             
         </div>
     </section>
