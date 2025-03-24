@@ -149,7 +149,7 @@ const SideBar = () => {
                     }}
                     >
                         {["All","Add new"].map((item, index) => (
-                            <Link key={index} href={`/admin/server/${item.toLocaleLowerCase().split(" ").join("")}`}> 
+                            <Link key={index} href={`/admin/customers/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
                                     onClick={() => setSection({ index: 2, innerIndex: index ,name:item})}
                                     className={`pl-14 border-b py-2 duration-75 ease-linear active:bg-[#327ab965] ${section.innerIndex === index? "bg-[#006cf84f]":"bg-transparent"}`}
