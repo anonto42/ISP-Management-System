@@ -93,10 +93,12 @@ const page = () => {
     <div className='w-full h-full'>
       <section className='w-full max-w-[1600px] p-6 mx-auto'>
         <PaginationComponent<user>
-          paginateTitle='Live Connection report'
+          paginateTitle='All Customers'
           action={{view:true,delete:true,edite:true}}
           fields={["User ID","User Name","password","Mobile","Client Info","Expire"]}
           allData={allUser}
+          addUserButton
+          key={"All cuntomers"}
         />
       </section>
     </div>

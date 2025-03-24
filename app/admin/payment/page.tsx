@@ -142,7 +142,7 @@ const page = () => {
     <div className='w-full h-full'>
       <section className='w-full max-w-[1600px] p-6 mx-auto'>
         <PaginationComponent<transtion>
-          paginateTitle='Live Connection report'
+          paginateTitle='Playment Details'
           action={{delete:true}}
           fields={["ID","Amount","Transaction ID","Mobile","User ID","Pay-by","Date"]}
           addUserButton={false}

@@ -142,6 +142,8 @@ const page = () => {
           action={{view:true}}
           fields={["ID","IP Address","Type","MAC","Uptime","Remark"]}
           allData={userPPPoE}
+          addUserButton
+          key={"PPPoE"}
         />
       </section>
     </div>

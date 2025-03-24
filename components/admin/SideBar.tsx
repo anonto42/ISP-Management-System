@@ -230,7 +230,7 @@ const SideBar = () => {
                         paddingBottom: section.index === 4? "16px":"0"
                     }}
                     >
-                        {["All","Individual"].map((item, index) => (
+                        {["All","individual"].map((item, index) => (
                             <Link href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
                                     key={index}
@@ -252,7 +252,7 @@ const SideBar = () => {
                             >
                             {
                                 ["All","Individual"].map((item,index)=>{
-                                    return <Link href={`/admin/customers/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link href={`/admin/message/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
                                             key={index}
                                             onClick={()=>{
@@ -321,7 +321,7 @@ const SideBar = () => {
                             >
                             {
                                 ["Income","Expense","Stuff"].map((item,index)=>{
-                                    return <Link href={`/admin/customers/${item.toLocaleLowerCase().split(" ").join("")}`}>
+                                    return <Link href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
                                             key={index}
                                             onClick={()=>{

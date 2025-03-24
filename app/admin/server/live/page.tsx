@@ -168,6 +168,8 @@ const page = () => {
           action={{view:true}}
           fields={["ID","IP Address","Type","MAC","Uptime","Remark"]}
           allData={connectedUser}
+          addUserButton
+          key={"All User"}
         />
       </section>
     </div>

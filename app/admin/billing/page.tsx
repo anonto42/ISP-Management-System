@@ -202,11 +202,12 @@ const page = () => {
       <section className='w-full max-w-[1600px] p-6 mx-auto'>
         <PaginationComponent<payedUser>
           addUserButton={false}
-          paginateTitle='Live Connection report'
+          paginateTitle='Billing'
           // add a get paymet resite layter
           action={{view:true,delete:true}}
           fields={["Invoice","ID","UserName","Received","Transaction","Branch","Data","Remark"]}
           allData={getPayment}
+          key={"Billing"}
         />
       </section>
     </div>
