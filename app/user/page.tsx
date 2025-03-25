@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
 import imag from "@/app/icon.png"
@@ -6,13 +5,13 @@ import Link from 'next/link'
 
 
 const User = () => {
-  const [rows] = useState([
+  const rows = [
     { id: 1, name: 'John Doe', age: 30, amout:"2000",status:"PAID",date:"10-02-2034" },
     { id: 2, name: 'Jane Smith', age: 25, amout:"2000",status:"PAID",date:"10-02-2034" },
     { id: 3, name: 'Sam Brown', age: 35,amout:"2000",status:"PAID",date:"10-02-2034" },
     { id: 4, name: 'Lisa White', age: 28, amout:"2000",status:"PAID",date:"10-02-2034" },
     { id: 5, name: 'Mark Black', age: 40, amout:"2000",status:"PAID",date:"10-02-2034" },
-  ]);
+  ];
 
   return (
     <div className='py-4'>
@@ -130,7 +129,7 @@ const User = () => {
       </section>
 
       <section className='w-full mt-4 px-4'>
-        <table className="min-w-full border-collapse border border-[#FFFFFF]">
+        <table className="min-w-full border-collapse border border-[#FFFFFF] text-gray-500">
           <thead>
             <tr className="bg-[#FFFFFF]">
               <th className="border border-[#FFFFFF] px-4 py-2">INVOIVE NO:</th>
@@ -143,7 +142,7 @@ const User = () => {
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.id} className='bg-[#60a4fd38]'>
+              <tr key={row.id} className='bg-[#60a4fd38] text-gray-900'>
                 <td className="border border-[#FFFFFF] px-4 py-2">{row.id}</td>
                 <td className="border border-[#FFFFFF] px-4 py-2">{row.age}</td>
                 <td className="border border-[#FFFFFF] px-4 py-2">{row.name}</td>
