@@ -22,4 +22,7 @@ body {
   .acctionIcon{
     @apply w-[30px] h-[30px] flex justify-center items-center text-xl rounded-lg shadow active:scale-95 duration-100 ease-in-out text-white
   }
+  .userNaveItems{
+    @apply flex items-center py-2 text-white gap-2 px-2 active:text-gray-900 duration-100 ease-in-out
+  }
 }
