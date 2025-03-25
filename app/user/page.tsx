@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import imag from "@/app/icon.png"
+import Link from 'next/link'
 
 
 const User = () => {
@@ -119,7 +120,9 @@ const User = () => {
             <h4 className='text-sm'>Billings</h4>
             <h1 className='text-xl font-semibold'>Pay bills on time!</h1>
             <p className='text-sm'>We are strongly recommend you to pay your pils on time.</p>
-            <button className='text-white font-semibold px-4 py-2 bg-sky-600 rounded-lg shadow-sm mt-3'>Pay Bill</button>
+            <Link href={"/user/pay"} >
+              <button className='text-white font-semibold px-4 py-2 bg-sky-600 rounded-lg shadow-sm mt-3'>Pay Bill</button>
+            </Link>
           </div>
 
         </div>
