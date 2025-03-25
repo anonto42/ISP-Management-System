@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import imag from "@/app/icon.png"
 import Link from 'next/link'
 
