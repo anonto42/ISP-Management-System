@@ -31,7 +31,7 @@ const invoices:invoice[] = [
     },
 ]
 
-const page = () => {
+const UserAdimPage = () => {
     const [graph,setGraph] = useState<boolean>(false); 
     const [deposite,setDeposite] = useState<boolean>(false); 
     const searchParams = useSearchParams();
@@ -164,4 +164,4 @@ const page = () => {
   )
 }
 
-export default page
+export default UserAdimPage

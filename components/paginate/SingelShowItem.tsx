@@ -39,7 +39,7 @@ const SingelShowItem = <T extends data>({data,collums,acction}:props<T>) => {
                 acction.delete? <div 
                     onClick={()=>deleteHanaler()}
                     title='Delete'
-                    className='w-[30px] h-[30px] bg-[#f7a5a5] flex justify-center items-center text-2xl text-[#ff0000] rounded-lg shadow'>
+                    className='acctionIcon text-[#ff0000] bg-[#f7a5a5] active:bg-[#ff8888]'>
                     <MdDeleteOutline />
                 </div>:<></>
             }
@@ -59,6 +59,7 @@ const SingelShowItem = <T extends data>({data,collums,acction}:props<T>) => {
                     onClick={()=>editeHanaler()}
                     title='Edite'
                     className='acctionIcon active:bg-[#7ff774] bg-[#d7ffd3] text-green-800'>
+                        <FaRegPenToSquare/>
                 </div> :<></>
             }
             {
