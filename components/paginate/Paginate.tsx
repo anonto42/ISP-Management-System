@@ -63,7 +63,7 @@ const PaginationComponent = <T extends comonAttrivoutes>(
 
   return (
     <div className="w-full overflow-x-auto">
-      <div className="w-full min-w-[800px] bg-[#EFECEC] text-black p-6 shadow-md">
+      <div className="w-full min-w-[800px] bg-[#F7F7F7] text-black p-6 shadow-md">
         <div className="mb-4 flex w-full justify-between border-b border-[#d1d1d1b9]">
           <h1 className="font-semibold text-xl pb-2 mb-4 text-start">{paginateTitle}</h1>
             {
