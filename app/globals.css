@@ -19,4 +19,7 @@ body {
   .icon-box{
     @apply w-full py-3 text-3xl flex justify-center items-center cursor-pointer text-[#dadef5] border-b-2 border-transparent
   }
+  .acctionIcon{
+    @apply w-[30px] h-[30px] flex justify-center items-center text-xl rounded-lg shadow active:scale-95 duration-100 ease-in-out text-white
+  }
 }

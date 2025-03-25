@@ -4,6 +4,7 @@ import { MdBlock, MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { acction } from './Paginate';
+import Link from 'next/link';
 
 interface props<T>{
     data:T;
@@ -11,12 +12,15 @@ interface props<T>{
     acction:acction;
 }
 
+interface data {
+    id?:string;
+}
 
-const SingelShowItem = <T extends object>({data,collums,acction}:props<T>) => {
+
+const SingelShowItem = <T extends data>({data,collums,acction}:props<T>) => {
 
     const deleteHanaler=():void=>{}
     const editeHanaler=():void=>{}
-    const viewHanaler=():void=>{}
 
   return (
     <div 
@@ -40,26 +44,28 @@ const SingelShowItem = <T extends object>({data,collums,acction}:props<T>) => {
                 </div>:<></>
             }
             {
-                acction.view? <div 
-                    onClick={()=>viewHanaler()}
+                acction.view? 
+                <Link href={`/admin/user?id=${data.id}`}>
+                    <div
                     title='View'
-                    className='w-[30px] h-[30px] bg-[#a5b8f7] flex justify-center items-center text-xl text-[#e3eefd] rounded-lg shadow'>
+                    className='acctionIcon text-white active:bg-[#90a8f5] bg-[#a5b8f7]'>
                     <FaEye />
-                </div>:<></>
+                </div>
+                </Link>
+                :<></>
             }
             {
                 acction.edite?<div 
                     onClick={()=>editeHanaler()}
                     title='Edite'
-                    className='w-[30px] h-[30px] bg-[#d7ffd3] flex justify-center items-center text-xl text-[#00ff15] rounded-lg shadow'>
-                    <FaRegPenToSquare />
+                    className='acctionIcon active:bg-[#7ff774] bg-[#d7ffd3] text-green-800'>
                 </div> :<></>
             }
             {
                 acction.block?<div 
                     onClick={()=>editeHanaler()}
                     title='Edite'
-                    className='w-[30px] h-[30px] bg-[#F79965] flex justify-center items-center text-xl text-[#D63613] rounded-lg shadow'>
+                    className='acctionIcon bg-[#F79965] text-[#D63613] active:bg-[#90a8f5]'>
                     <MdBlock />
                 </div> :<></>
             }
