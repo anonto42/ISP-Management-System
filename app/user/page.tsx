@@ -1,10 +1,21 @@
+"use client"
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import imag from "@/app/icon.png"
 
+
 const User = () => {
+  const [rows] = useState([
+    { id: 1, name: 'John Doe', age: 30, amout:"2000",status:"PAID",date:"10-02-2034" },
+    { id: 2, name: 'Jane Smith', age: 25, amout:"2000",status:"PAID",date:"10-02-2034" },
+    { id: 3, name: 'Sam Brown', age: 35,amout:"2000",status:"PAID",date:"10-02-2034" },
+    { id: 4, name: 'Lisa White', age: 28, amout:"2000",status:"PAID",date:"10-02-2034" },
+    { id: 5, name: 'Mark Black', age: 40, amout:"2000",status:"PAID",date:"10-02-2034" },
+  ]);
+
   return (
     <div className='py-4'>
+
       <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4'>
 
         <div className='bg-[#ffffff] p-4 shadow-[0px_4px_10px_#00000065] rounded-sm'>
@@ -113,10 +124,33 @@ const User = () => {
 
         </div>
 
-        <div>
-          {/* Recent invoice or the bils chat for user */}
-        </div>
+      </section>
 
+      <section className='w-full mt-4 px-4'>
+        <table className="min-w-full border-collapse border border-[#FFFFFF]">
+          <thead>
+            <tr className="bg-[#FFFFFF]">
+              <th className="border border-[#FFFFFF] px-4 py-2">INVOIVE NO:</th>
+              <th className="border border-[#FFFFFF] px-4 py-2">ID</th>
+              <th className="border border-[#FFFFFF] px-4 py-2">USER NAME</th>
+              <th className="border border-[#FFFFFF] px-4 py-2">AMMOUNT</th>
+              <th className="border border-[#FFFFFF] px-4 py-2">DATE</th>
+              <th className="border border-[#FFFFFF] px-4 py-2">STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id} className='bg-[#60a4fd38]'>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.id}</td>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.age}</td>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.name}</td>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.amout}</td>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.date}</td>
+                <td className="border border-[#FFFFFF] px-4 py-2">{row.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
     </div>
   )
