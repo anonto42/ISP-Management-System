@@ -40,4 +40,16 @@ body {
   .set_inp_{
     @apply bg-[#f3f3f3] border py-2 text-lg outline-[#bbf9fd] rounded-lg border-[#c4c4c4] w-full px-3
   }
+  .user_info_box{
+    @apply flex justify-between items-center py-3 px-4 border-b border-gray-300
+  }
+  .user_info_box_h3{
+    @apply text-[#585858] font-[550]
+  }
+  .user_info_box_h2{
+    @apply tracking-tight text-[#818181] text-sm
+  }
+  .user_info_box_btn{
+    @apply w-full rounded-lg bg-[#1a926a] md:py-3 py-1 font-semibold text-white md:text-lg duration-100 ease-in-out active:scale-95
+  }
 }
