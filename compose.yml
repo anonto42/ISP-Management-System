@@ -32,7 +32,7 @@ services:
       - /usr/app/node_modules
 
   mongo:
-    image: mongo:7.0.4-alpine
+    image: mongo
     ports:
       - 27017:27017
     volumes:
@@ -42,7 +42,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: toor
   
   mongo-express:
-    image: mongo-express:1.0.2-alpine
+    image: mongo-express:1.0.2-20-alpine3.19
     restart: always
     ports:
       - 8081:8081
