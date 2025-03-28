@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(uuid()) @map("_id") // Custom UUID with auto generation
+  fullName         String   @default("") // Full Name
+  email            String   @unique // Email
+  phoneNumber      String   @default("") // Phone Number
+  extraNumber      String   @default("") // Extra Number
+  nid              String   @unique @db.String() // NID, max length of 20
+  district         String   @default("") // District
+  upozala          String   @default("") // Upojala
+  area             String   @default("") // Area
+  houseNo          String   @default("") // House No
+  floorNo          String   @default("") // Floor No
+  connectivityType String   @default("") // Type of Connectivity
+  change           Boolean  @default(false) // Change (can be a boolean)
+  wireCode         String   @default("") // Wire Code
+  wireType         String   @default("") // Wire Type
+  userName         String   @unique // UserName
+  password         String   // Password, should be required
+  remark           String   @default("") // Remark
+  reseller         Boolean  @default(false) // Reseller
+  securityDeposit  Float    @default(0) // Security Deposit
+  picture          String   @default("") // Picture URL or Path
+  dateOfConnection DateTime @default(now()) // Date of connection
+  package          String   @default("") // Package
+}
