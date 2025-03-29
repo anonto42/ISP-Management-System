@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NaveBar from "@/components/admin/NaveBar";
 import SideBar from "@/components/admin/SideBar";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
                 {children}
             </div>
         </div>
+        <ToastContainer />
       </body>
     </html>
   );
