@@ -25,8 +25,10 @@ const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
             
             toast.success(data.message);
             
-        } catch (error) {
+        } catch (error:any) {
             console.log(error)
+            setLoading(false);
+            toast.error(error.response.data.message);
         }
     }
 
