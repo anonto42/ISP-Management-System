@@ -8,7 +8,7 @@ services:
     environment:
       NODE_ENV: development
     env_file:
-      - .env.local
+      - .env
     develop:
       watch:
         - action: sync
