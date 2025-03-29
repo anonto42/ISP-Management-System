@@ -4,6 +4,8 @@ import { BiMailSend } from 'react-icons/bi'
 import { BsSend } from 'react-icons/bs'
 import { IoMdClose } from 'react-icons/io'
 import Loader from '../loader/Loader'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
     const [loading,setLoading] = useState<boolean>(false);
@@ -12,18 +14,26 @@ const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
 
     const handelSubmit = async ()=>{
         try {
+
             setLoading(true);
 
-            setTimeout(() => {
-                setLoading(false)
-            }, 2000);
+            const { data } = await axios.post("/api/message",{number:to,message})
+
+            setTo("");
+            setMessage("");
+            setLoading(false);
+            
+            toast.success(data.message);
             
         } catch (error) {
             console.log(error)
         }
     }
 
-    const handelClear =()=>{}
+    const handelClear =()=>{
+        setTo("");
+        setMessage("");
+    }
     
   return (
     <div className='w-full h-full relative'>
