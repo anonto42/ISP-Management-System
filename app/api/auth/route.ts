@@ -18,8 +18,6 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        console.log(email,password)
-
         const emailAddress:string = email.trim().toString();
         const user = await prismaDB.user.findUnique({
             where: { email: emailAddress }
