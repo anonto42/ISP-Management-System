@@ -28,8 +28,8 @@ export default async function RootLayout({
 }>) {
 
   const User = await getUser();
-  if (User.userType != "admin") {
-      if (User.userType == "user") {
+  if (( User as { userType:string }).userType !== "admin") {
+      if (( User as { userType:string }).userType !== "user") {
         redirect("/user")
       }else{
         redirect("/")

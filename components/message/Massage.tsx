@@ -4,7 +4,7 @@ import { BiMailSend } from 'react-icons/bi'
 import { BsSend } from 'react-icons/bs'
 import { IoMdClose } from 'react-icons/io'
 import Loader from '../loader/Loader'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
 const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
@@ -25,11 +25,15 @@ const Massage = ({isSendAll}:{isSendAll?:boolean}) => {
             
             toast.success(data.message);
             
-        } catch (error:any) {
-            console.log(error)
-            setLoading(false);
-            toast.error(error.response.data.message);
-        }
+        } catch (error: unknown) {
+          if (error instanceof AxiosError) {
+              toast.error(`${error.response?.data?.message}`);
+              console.log(error.response);
+          } else {
+              console.error("An unknown error occurred:", error);
+          }
+          setLoading(false);
+      }
     }
 
     const handelClear =()=>{

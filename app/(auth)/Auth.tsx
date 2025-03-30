@@ -1,6 +1,6 @@
 "use client"
 import Loader from '@/components/loader/Loader';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 
@@ -28,9 +28,13 @@ const Auth = () => {
                 window.location.reload();
             }, 2500);
             
-        } catch (error:any) {
-            toast.error(`${error.response.data.message}`)
-            console.log(error.response)
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                toast.error(`${error.response?.data?.message}`);
+                console.log(error.response);
+            } else {
+                console.error("An unknown error occurred:", error);
+            }
             setLoading(false);
         }
     }

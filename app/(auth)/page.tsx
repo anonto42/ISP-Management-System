@@ -6,12 +6,13 @@ import { redirect } from "next/navigation";
 const Login = async () => {
     
     const User = await getUser();
-    if (User.userType == "admin") {
-        redirect("/admin")
-    }else if ( User.userType == "user"){
-        redirect("/user")
-    }else{
+    if (!User) {
         console.log("user not found!")
+    }
+    if (( User as { userType:string }).userType !== "admin") {
+        redirect("/admin")
+    }else if (( User as { userType:string }).userType !== "user"){
+        redirect("/user")
     }
 
     return (

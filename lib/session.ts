@@ -1,4 +1,5 @@
 import prismaDB from '@/prisma/pot';
+import { User } from '@prisma/client';
 import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
@@ -17,20 +18,26 @@ export const createToken = (id:string) => {
 
 export const verifyToken = async (): Promise<boolean | string> => {
     try {
-        const coookie = await cookies();
-        const token = coookie.get('idmsq');
+        const cookie = await cookies(); // Assuming cookies() is a method returning cookies
+        const token = cookie.get('idmsq');
         if (!token) return false;
+
         const { id } = jwt.verify(token.value, SECRET_KEY!) as JwtPayload;
         if (!id) {
-            return false
+            return false;
         }
         return id as string;
-    } catch (error) {
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error(error);
+        } else {
+            console.error("An unknown error occurred.");
+        }
         return false;
     }
 };
 
-export const getUser = async (): Promise<any> => {
+export const getUser = async (): Promise<User | boolean> => {
     const deCodedValue = await verifyToken();
     if (!deCodedValue) {
         return false;  

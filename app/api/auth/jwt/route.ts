@@ -19,7 +19,7 @@ export async function POST() {
         }
         
         const user = await prismaDB.user.findUnique({
-            where:{id:deCodedValue}
+            where:{id:deCodedValue as string}
         });
         if (!user) {
             return NextResponse.json(
