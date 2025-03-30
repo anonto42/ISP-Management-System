@@ -1,3 +1,4 @@
+import prismaDB from '@/prisma/pot';
 import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
@@ -14,9 +15,9 @@ export const createToken = (id:string) => {
 };
 
 
-export const verifyToken = async () => {
+export const verifyToken = async (): Promise<boolean | string> => {
     try {
-        const coookie = await cookies()
+        const coookie = await cookies();
         const token = coookie.get('idmsq');
         if (!token) return false;
         const { id } = jwt.verify(token.value, SECRET_KEY!) as JwtPayload;
@@ -28,3 +29,20 @@ export const verifyToken = async () => {
         return false;
     }
 };
+
+export const getUser = async (): Promise<any> => {
+    const deCodedValue = await verifyToken();
+    if (!deCodedValue) {
+        return false;  
+    }else{
+        const user = await prismaDB.user.findUnique({
+            where:{
+                id:deCodedValue as string
+            }
+        });
+        if (!user) {
+            return false; 
+        }
+        return user
+    }
+}
