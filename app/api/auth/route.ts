@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
             {
                 message: "Login successful!",
                 success: true,
+                userType: user.userType
             },
             {
                 status: 200
