@@ -17,12 +17,17 @@ const Auth = () => {
             }
 
             const { data } = await axios.post("/api/auth",{email,password},{withCredentials: true});
-
+            
             toast.success(data.message);
             
             setEmail("");
             setPassword("");
             setLoading(false);
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2500);
+            
         } catch (error:any) {
             toast.error(`${error.response.data.message}`)
             console.log(error.response)
