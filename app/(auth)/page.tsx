@@ -1,34 +1,24 @@
-import React from 'react'
+"use server"
+import Auth from "./Auth"
+import { getUser } from "@/lib/session"
+import { redirect } from "next/navigation";
 
-const Auth = () => {
-  return (
-    <div className='w-full h-svh flex justify-center items-center'>
-        <section className='py-11 px-6 rounded-xl bg-[#8290c0] shadow-md flex justify-center items-center'>
-            <div className='w-full px-4'>
-                <h1 className='font-bold text-[#04082c] text-center pb-5 text-2xl'>Login your accout</h1>
-                <div className='inp-box-login'>
-                    <input 
-                        className='inp-login'
-                        placeholder='User Name'    
-                        type="text"
-                        name=""
-                    />
-                </div>
-                <div className='inp-box-login'>
-                    <input 
-                        className='inp-login'  
-                        placeholder='Password'  
-                        type="text"
-                        name=""
-                    />
-                </div>
-                <div className='flex justify-center'>
-                    <button className='btn'>Login</button>
-                </div>
-            </div>
-        </section>
-    </div>
-  )
+const Login = async () => {
+    
+    const User = await getUser();
+    if (User.userType == "admin") {
+        redirect("/admin")
+    }else if ( User.userType == "user"){
+        redirect("/user")
+    }else{
+        console.log("user not found!")
+    }
+
+    return (
+        <div className='w-full h-svh flex justify-center items-center'>
+            <Auth />
+        </div>
+    )
 }
 
-export default Auth
+export default Login
