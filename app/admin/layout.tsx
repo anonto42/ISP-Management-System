@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NaveBar from "@/components/admin/NaveBar";
 import SideBar from "@/components/admin/SideBar";
+import { getUser } from "@/lib/session";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +21,21 @@ export const metadata: Metadata = {
   description: "Manage you softwer from hear",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const User = await getUser();
+  if (User.userType != "admin") {
+      if (User.userType == "user") {
+        redirect("/user")
+      }else{
+        redirect("/")
+      }
+  }
+     
   return (
     <html lang="en">
       <body
