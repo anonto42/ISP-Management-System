@@ -32,7 +32,7 @@ model User {
   userName         String   @unique @default("")
   password         String
   remark           String   @default("")
-  reseller         Boolean  @default(false)
+  reseller         String  @default("")
   securityDeposit  Float    @default(0)
   picture          String   @default("")
   dateOfConnection DateTime @default(now())
