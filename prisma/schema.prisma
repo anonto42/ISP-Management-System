@@ -14,27 +14,28 @@ datasource db {
 }
 
 model User {
-  id               String   @id @default(uuid()) @map("_id") // Custom UUID with auto generation
-  fullName         String   @default("") // Full Name
-  email            String   @unique // Email
-  phoneNumber      String   @default("") // Phone Number
-  extraNumber      String   @default("") // Extra Number
-  nid              String   @unique @db.String() // NID, max length of 20
-  district         String   @default("") // District
-  upozala          String   @default("") // Upojala
-  area             String   @default("") // Area
-  houseNo          String   @default("") // House No
-  floorNo          String   @default("") // Floor No
-  connectivityType String   @default("") // Type of Connectivity
-  change           Boolean  @default(false) // Change (can be a boolean)
-  wireCode         String   @default("") // Wire Code
-  wireType         String   @default("") // Wire Type
-  userName         String   @unique // UserName
-  password         String   // Password, should be required
-  remark           String   @default("") // Remark
-  reseller         Boolean  @default(false) // Reseller
-  securityDeposit  Float    @default(0) // Security Deposit
-  picture          String   @default("") // Picture URL or Path
-  dateOfConnection DateTime @default(now()) // Date of connection
-  package          String   @default("") // Package
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName         String   @default("")
+  email            String   @unique
+  phoneNumber      String   @default("")
+  extraNumber      String   @default("")
+  nid              String   @default("")
+  district         String   @default("")
+  upozala          String   @default("")
+  area             String   @default("")
+  houseNo          String   @default("")
+  floorNo          String   @default("")
+  connectivityType String   @default("")
+  change           Boolean  @default(false)
+  wireCode         String   @default("")
+  wireType         String   @default("")
+  userName         String   @unique @default("")
+  password         String
+  remark           String   @default("")
+  reseller         Boolean  @default(false)
+  securityDeposit  Float    @default(0)
+  picture          String   @default("")
+  dateOfConnection DateTime @default(now())
+  interNetPackage  String   @default("")
+  userType         String   @default("user")
 }
