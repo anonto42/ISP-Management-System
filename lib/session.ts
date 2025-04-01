@@ -1,55 +1,25 @@
-import prismaDB from '@/prisma/pot';
-import { User } from '@prisma/client';
-import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
+import { JWTPayload, jwtVerify, SignJWT } from 'jose';
 
-const SECRET_KEY = process.env.JWT_SECRET_KEY;
+const SECRET_KEY = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
 
-export const createToken = (id:string) => {
+export const createToken = async (value: JWTPayload) => {
 
-    const options: SignOptions = {
-        expiresIn: '2d',
-        algorithm: 'HS256'
-    };
-
-    return jwt.sign({id}, SECRET_KEY!, options);
+    const token = await new SignJWT(value)
+        .setProtectedHeader({ alg: "HS256" })
+        .setIssuedAt()
+        .setExpirationTime("2d")
+        .sign(SECRET_KEY)
+    
+    return token;
 };
 
+export const verifyToken = async () => {
+    const cookie = await cookies();
+    const jwt = cookie.get("idmsq");
+    if (!jwt?.value) return false;
+    
+    const { payload } = await jwtVerify(jwt?.value as string, SECRET_KEY);
 
-export const verifyToken = async (): Promise<boolean | string> => {
-    try {
-        const cookie = await cookies(); // Assuming cookies() is a method returning cookies
-        const token = cookie.get('idmsq');
-        if (!token) return false;
-
-        const { id } = jwt.verify(token.value, SECRET_KEY!) as JwtPayload;
-        if (!id) {
-            return false;
-        }
-        return id as string;
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            console.error(error);
-        } else {
-            console.error("An unknown error occurred.");
-        }
-        return false;
-    }
+    return payload ? { id: payload.id, role: payload.role } : false;
 };
-
-export const getUser = async (): Promise<User | boolean> => {
-    const deCodedValue = await verifyToken();
-    if (!deCodedValue) {
-        return false;  
-    }else{
-        const user = await prismaDB.user.findUnique({
-            where:{
-                id:deCodedValue as string
-            }
-        });
-        if (!user) {
-            return false; 
-        }
-        return user
-    }
-}

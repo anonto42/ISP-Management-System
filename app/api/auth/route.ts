@@ -62,14 +62,19 @@ export async function POST(req: NextRequest) {
                     );
             }
         }
-        
-        const token = createToken(user.id);
+
+        const token = await createToken(
+            {
+                id:user.id,
+                role: user.userType
+            }
+        );
 
         const responce =  NextResponse.json(
             {
                 message: "Login successful!",
                 success: true,
-                userType: user.userType
+                userType: user?.userType
             },
             {
                 status: 200

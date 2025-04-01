@@ -1,19 +1,18 @@
-"use server"
+import { verifyToken } from "@/lib/session";
 import Auth from "./Auth"
-import { getUser } from "@/lib/session"
 import { redirect } from "next/navigation";
 
 const Login = async () => {
-    
-    const User = await getUser();
-    if (!User) {
-        console.log("user not found!")
+
+    const session = await verifyToken();
+    const isAdmin = session? session.role === "admin" : false;
+    const user = session? session.role === "user" : false;
+    if(isAdmin){
+       redirect("/admin");
+    } else if (user) {
+       redirect("/user");
     }
-    if (( User as { userType:string }).userType !== "admin") {
-        redirect("/admin")
-    }else if (( User as { userType:string }).userType !== "user"){
-        redirect("/user")
-    }
+
 
     return (
         <div className='w-full h-svh flex justify-center items-center'>
