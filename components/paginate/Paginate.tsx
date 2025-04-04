@@ -11,7 +11,8 @@ export interface acction{
 }
 
 interface comonAttrivoutes{
-  id: string;
+  userName: string;
+  id?: string;
 }
 
 interface props<T>{
@@ -31,16 +32,12 @@ const PaginationComponent = <T extends comonAttrivoutes>(
     addUserButton
   }:props<T>) => {
 
-  const [search, setSearch] = useState(""); // State for search input
-  const [itemsPerPage, setItemsPerPage] = useState(5); // State for items per page
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const [search, setSearch] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter users based on the search term
-  // const filteredUsers = usersData.filter(user =>
-  //   user.name.toLowerCase().includes(search.toLowerCase())
-  // );
   const filteredUsers = allData.filter(user =>
-    user.id.toString().toLocaleLowerCase().includes(search.toString().toLowerCase())
+    user.userName.toString().toLocaleLowerCase().includes(search.toString().toLowerCase())
   );
 
   // Get the current page's users based on itemsPerPage
@@ -94,7 +91,7 @@ const PaginationComponent = <T extends comonAttrivoutes>(
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search user by id."
+              placeholder="Search user by userName..."
               className="p-2 outline-none rounded-lg bg-[white] shadow"
             />
           </div>
