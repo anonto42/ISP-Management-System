@@ -26,16 +26,46 @@ model User {
   houseNo          String   @default("")
   floorNo          String   @default("")
   connectivityType String   @default("")
-  change           Boolean  @default(false)
   wireCode         String   @default("")
   wireType         String   @default("")
-  userName         String   @unique @default("")
+  userName         String   @unique @default("") // Unique identifier
   password         String
-  remark           String   @default("")
-  reseller         String  @default("")
-  securityDeposit  Float    @default(0)
-  picture          String   @default("")
+  referral         String   @default("")
+  reseller         String   @default("")
+  securityDeposit  String    @default("0")
+  picture          String   @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
   dateOfConnection DateTime @default(now())
   interNetPackage  String   @default("")
   userType         String   @default("user")
+
+  // Relation with Transaction
+  transactions Transaction[] @relation("UserTransactions")
+}
+
+model Transaction {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userName        String   @map("userName")
+  fullName        String
+  amount          Int
+  transactionType String
+  puspes          String
+  date            DateTime @default(now())
+
+  user User @relation(fields: [userName], references: [userName], name: "UserTransactions")
+}
+
+model Servers {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String @default("")
+  type   String @default("")
+  url    String @default("http://localhost")
+  status String @default("")
+}
+
+model Packages {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String @default("")
+  price       Float
+  description String @default("")
+  status      String @default("")
 }
