@@ -11,7 +11,7 @@ const data = [
 
 const Graph = () => {
   return (
-    <div className="w-full bg-[#efecec] p-4 text-black shadow-lg h-[400px]">
+    <div className="w-full bg-[#efecec] p-4 text-black shadow-lg h-[460px]">
       <h1 className="font-semibold text-xl mb-4">User increase</h1>
       <div className="w-full h-[88%]">
         <ResponsiveContainer width="100%" height="100%">
