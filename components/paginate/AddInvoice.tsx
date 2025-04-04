@@ -1,6 +1,9 @@
 "use client";
 import React, { SetStateAction, useState } from "react";
 import SingelShowItem from "./SingelShowItem";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import Loader from "../loader/Loader";
 
 export interface acction{
   delete?: boolean;
@@ -10,7 +13,8 @@ export interface acction{
 }
 
 interface comonAttrivoutes{
-  id: string;
+  id?: string;
+  userName: string
 }
 
 interface props<T>{
@@ -36,7 +40,7 @@ const AddInvoice = <T extends comonAttrivoutes>(
   const [addNew,setAddNew] = useState<boolean>(false);
 
   const filteredUsers = allData.filter(user =>
-    user.id.toString().toLocaleLowerCase().includes(search.toString().toLowerCase())
+    user.userName.toString().toLocaleLowerCase().includes(search.toString().toLowerCase())
   );
 
   const indexOfLastUser = currentPage * itemsPerPage;
@@ -169,9 +173,49 @@ export function AddNewCount({
 }:{
     setAddComponent: React.Dispatch<SetStateAction<boolean>>
 }) {
+  const [amout,setAmount] = useState<string>();
+  const [purpus,setPurpus] = useState<string>();
+  const [date,setDate] = useState<string>();
+  const [userName,setUserName] = useState<string>();
+  const [receved,setReceved] = useState<string>();
+  const [loading,setLoading] = useState<boolean>(false);
+
+  const handerUpload = async () => {
+    try {
+      setLoading(true);
+
+      const income_data = {
+        amount:Number(amout), 
+        type:"income", 
+        purpes:purpus, 
+        date: date,
+        userName:userName,
+        receved
+      }
+
+      const { data } = await axios.post("/api/transection",income_data);
+      
+      console.log(data);
+      setLoading(false);
+
+      toast.success(data.message);
+      setAddComponent(false);
+
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+          toast.error(`${error.response?.data?.message}`);
+          console.log(error.response);
+      } else {
+          console.error("An unknown error occurred:", error);
+      }
+      setLoading(false);
+    }
+  }
 
     return(
         <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-[50%] shadow-[#0000005d] shadow-[0px_0px_60px] bg-[#ffffff] rounded-xl sm:w-[600px] md:min-w-[450px] max-w-[700px]">
+          { loading && <Loader />}
             <div className="p-4 w-full h-full">
                 <h1
                     className="text-xl font-semibold border-b border-[#e2e2e2] pb-2"
@@ -180,33 +224,50 @@ export function AddNewCount({
                     <div className="add_item_inp_box">
                         <h3 className="">Amount (Taka)</h3>
                         <input
+                            value={amout}
+                            onChange={ e => setAmount(e.target.value)}
                             className="add_item_inp" 
                             type="text" />
                     </div>
                     <div className="add_item_inp_box">
                         <h3 className="">Type of Income</h3>
                         <input
+                            value={purpus}
+                            onChange={ e => setPurpus(e.target.value)}
+                            className="add_item_inp" 
+                            type="text" />
+                    </div>
+                    <div className="add_item_inp_box">
+                        <h3 className="">User Name</h3>
+                        <input
+                            value={userName}
+                            onChange={ e => setUserName(e.target.value)}
+                            className="add_item_inp" 
+                            type="text" />
+                    </div>
+                    <div className="add_item_inp_box">
+                        <h3 className="">Payment Methord</h3>
+                        <input
+                            value={receved}
+                            onChange={ e => setReceved(e.target.value)}
                             className="add_item_inp" 
                             type="text" />
                     </div>
                     <div className="add_item_inp_box">
                         <h3 className="mr-2">Payment date</h3>
                         <input
+                            onChange={ e => setDate(e.target.value)}
                             className="add_item_inp" 
                             type="date" />
-                    </div>
-                    <div className="add_item_inp_box">
-                        <h3 className="">Created by</h3>
-                        <input
-                            className="add_item_inp" 
-                            type="text" />
                     </div>
                 </div>
                 <div className="flex justify-around mt-3">
                     <button 
                         onClick={()=>setAddComponent(false)}
                         className="_btn_ bg-red-200 text-red-700 rounded-sm">Close</button>
-                    <button className="_btn_ bg-green-700 text-white rounded-sm">Submit</button>    
+                    <button 
+                      onClick={()=>handerUpload()}
+                      className="_btn_ bg-green-700 text-white rounded-sm">Submit</button>    
                 </div>
             </div>
         </div>
