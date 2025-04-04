@@ -32,7 +32,7 @@ model User {
   password         String
   referral         String   @default("")
   reseller         String   @default("")
-  securityDeposit  String    @default("0")
+  securityDeposit  String   @default("0")
   picture          String   @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
   dateOfConnection DateTime @default(now())
   interNetPackage  String   @default("")
@@ -45,7 +45,7 @@ model User {
 model Transaction {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   userName        String   @map("userName")
-  fullName        String
+  methordName     String
   amount          Int
   transactionType String
   puspes          String
