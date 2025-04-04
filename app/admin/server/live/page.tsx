@@ -1,15 +1,6 @@
 import PaginationComponent from '@/components/paginate/Paginate'
 import React from 'react'
 
-interface liveConnectedUser {
-  id: string;
-  ipAddress: string;
-  type:string;
-  mac:string;
-  upTime:string;
-  remark:number
-}
-
 const page = () => {
   return (
     <div className='h-full w-full'>

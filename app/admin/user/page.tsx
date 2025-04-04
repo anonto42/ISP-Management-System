@@ -9,28 +9,6 @@ import BandwidUsage from '@/components/graph/BandwidUsage'
 import DiposideUserBalance from '@/components/admin/Boxes/DiposideUserBalance'
 
 
-interface invoice{
-    id:string;
-    fullName:string;
-    invoiceNumber:string;
-    transaction:string;
-    statue:string;
-    date:string;
-    amount:string;
-}
-
-const invoices:invoice[] = [
-    {
-        id:"23",
-        fullName:"user Name",
-        invoiceNumber:"01990579274",
-        transaction:"Bkash",
-        statue:"Pament",
-        date:"20-03-2025",
-        amount:"2000 Taka"
-    },
-]
-
 const UserAdimPage = () => {
     const [graph,setGraph] = useState<boolean>(false); 
     const [deposite,setDeposite] = useState<boolean>(false); 
@@ -151,11 +129,11 @@ const UserAdimPage = () => {
         </section>
 
         <section className='max-w-[1600px] mx-auto mt-4'>
-            <PaginationComponent<invoice>
+            <PaginationComponent
                 action={{delete:true}}
                 addUserButton={false}
                 fields={["ID","Full Name","Number","Transaction","Status","Date","Amount"]}
-                allData={invoices}
+                allData={[]}
                 paginateTitle='Invoices'
             />
         </section>

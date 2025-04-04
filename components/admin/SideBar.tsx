@@ -6,7 +6,6 @@ import { MdOutlineSupervisedUserCircle } from "react-icons/md";
 import { TbCoinTaka } from "react-icons/tb";
 import { MdOutlineMessage } from "react-icons/md";
 import { PiTarget } from "react-icons/pi";
-import { MdOutlinePayments } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import Link from 'next/link';
 import { GoChevronDown, GoChevronRight } from 'react-icons/go';
