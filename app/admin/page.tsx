@@ -46,15 +46,15 @@ const AdminDeshboard = async () => {
   const customers = accounts.filter( doc => doc.userType !== "admin" );
   const resellersCount = accounts.filter(user => user.userType === "reseller");
 
-  const expens = paymentHistory.filter( doc => doc.transactionType === "expense"  && new Date(doc.date).toISOString().split("T")[0] === today ).reduce((sum, doc) => sum + doc.amount, 0);
+  const expens = paymentHistory
+  .filter(doc => doc.transactionType === "expense" && doc.date === today)
+  .reduce((sum, doc) => sum + doc.amount, 0);
 
   const income = paymentHistory
   .filter(doc => doc.transactionType === "income" && doc.date === today)
   .reduce((sum, doc) => sum + doc.amount, 0);
 
   const toDaysAllTranscictions = paymentHistory.filter( doc => new Date(doc.date).toISOString().split("T")[0] === today );
-
-console.log(toDaysAllTranscictions)
 
   const dataObject:renderData[] = [
   {

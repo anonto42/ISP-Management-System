@@ -1,35 +1,25 @@
-import AddInvoice from '@/components/paginate/AddInvoice';
+import AddInvoice from '@/components/paginate/AddInvoice'
+import prismaDB from '@/prisma/pot';
 import React from 'react'
 
-
-interface transiction{
-  id:string;
-  amount:number;
-  typeOfPayment:string;
-  date:string;
-  createdBy:string;
-}
-
-const transiction_history:transiction[] = [
-  {
-    id:"232",
-    amount:1200,
-    typeOfPayment:"onu",
-    date:"10-01-2025",
-    createdBy:"shuvo",
-  },
-]
-
+const paymentHistory = (await prismaDB.transaction.findMany()).filter( i => i.transactionType === "expense").map(data => ({
+  userName: data.userName,
+  amount: data.amount,
+  transactionType: data.transactionType,
+  puspes: data.puspes,
+  date: new Date(data.date).toISOString().split("T")[0]
+})).reverse();
 
 const page = () => {
   return (
-    <div>
+    <div className='w-full h-full'>
       <section className='w-full max-w-[1600px] p-6 relative'>
-        <AddInvoice<transiction>
+        <AddInvoice
           action={{delete:true}}
           addNewInvoice
-          allData={transiction_history}
-          fields={["ID","Amount","Type of expense","Date","Created By"]}
+          invoiceType='expense'
+          allData={paymentHistory}
+          fields={["User Name","Amount","Transaction Type","Purpes","Date"]}
           paginateTitle='Expense'
         />
       </section>

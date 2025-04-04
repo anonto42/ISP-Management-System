@@ -22,7 +22,8 @@ interface props<T>{
   paginateTitle:string;
   fields:string[];
   allData:T[];
-  addNewInvoice:boolean
+  addNewInvoice:boolean;
+  invoiceType?:"income" | "expense";
 }
 
 const AddInvoice = <T extends comonAttrivoutes>(
@@ -31,7 +32,8 @@ const AddInvoice = <T extends comonAttrivoutes>(
     fields,
     action,
     allData,
-    addNewInvoice
+    addNewInvoice,
+    invoiceType = "income"
   }:props<T>) => {
 
   const [search, setSearch] = useState("");
@@ -59,11 +61,9 @@ const AddInvoice = <T extends comonAttrivoutes>(
     }
   };
 
-  const addNewIncome = async ():Promise<void> => {
+  const addNewIncome = async ()=> {
     try {
         setAddNew(true);
-
-
     } catch (error) {
         console.log(error)
     }
@@ -71,7 +71,7 @@ const AddInvoice = <T extends comonAttrivoutes>(
 
   return (
     <div className="w-full overflow-x-auto">
-    { addNew && <AddNewCount setAddComponent={setAddNew} /> }
+    { addNew && <AddNewCount invoiceType={invoiceType} setAddComponent={setAddNew} /> }
       <div className="w-full min-w-[800px] bg-[#EFECEC] text-black p-6 shadow-md">
         <div className="mb-4 flex w-full justify-between border-b border-[#d1d1d1b9]">
           <h1 className="font-semibold text-xl pb-2 mb-4 text-start">{paginateTitle}</h1>
@@ -105,7 +105,7 @@ const AddInvoice = <T extends comonAttrivoutes>(
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by id."
+              placeholder="Search by userName."
               className="p-2 outline-none rounded-lg bg-[white] shadow"
             />
           </div>
@@ -169,9 +169,11 @@ export default AddInvoice;
 
 
 export function AddNewCount({
+    invoiceType,
     setAddComponent
 }:{
-    setAddComponent: React.Dispatch<SetStateAction<boolean>>
+    setAddComponent: React.Dispatch<SetStateAction<boolean>>,
+    invoiceType: "income" | "expense"
 }) {
   const [amout,setAmount] = useState<string>();
   const [purpus,setPurpus] = useState<string>();
@@ -181,35 +183,68 @@ export function AddNewCount({
   const [loading,setLoading] = useState<boolean>(false);
 
   const handerUpload = async () => {
-    try {
-      setLoading(true);
-
-      const income_data = {
-        amount:Number(amout), 
-        type:"income", 
-        purpes:purpus, 
-        date: date,
-        userName:userName,
-        receved
+    if (invoiceType === "income") {
+      try {
+        setLoading(true);
+  
+        const income_data = {
+          amount:Number(amout), 
+          type:"income", 
+          purpes:purpus, 
+          date: date,
+          userName:userName,
+          receved
+        }
+  
+        const { data } = await axios.post("/api/transection",income_data);
+        
+        console.log(data);
+        setLoading(false);
+  
+        toast.success(data.message);
+        setAddComponent(false);
+  
+      } catch (error) {
+        console.log(error);
+        if (error instanceof AxiosError) {
+            toast.error(`${error.response?.data?.message}`);
+            console.log(error.response);
+        } else {
+            console.error("An unknown error occurred:", error);
+        }
+        setLoading(false);
       }
-
-      const { data } = await axios.post("/api/transection",income_data);
-      
-      console.log(data);
-      setLoading(false);
-
-      toast.success(data.message);
-      setAddComponent(false);
-
-    } catch (error) {
-      console.log(error);
-      if (error instanceof AxiosError) {
-          toast.error(`${error.response?.data?.message}`);
-          console.log(error.response);
-      } else {
-          console.error("An unknown error occurred:", error);
+    }else{
+      try {
+        setLoading(true);
+  
+        const income_data = {
+          amount:Number(amout), 
+          type:"expense", 
+          purpes:purpus, 
+          date: date,
+          userName:userName,
+          receved
+        }
+  
+        const { data } = await axios.post("/api/transection",income_data);
+        
+        console.log(data);
+        setLoading(false);
+  
+        toast.success(data.message);
+        setAddComponent(false);
+  
+      } catch (error) {
+        console.log(error);
+        if (error instanceof AxiosError) {
+            toast.error(`${error.response?.data?.message}`);
+            console.log(error.response);
+        } else {
+            console.error("An unknown error occurred:", error);
+        }
+        setLoading(false);
       }
-      setLoading(false);
     }
   }
 
@@ -230,7 +265,7 @@ export function AddNewCount({
                             type="text" />
                     </div>
                     <div className="add_item_inp_box">
-                        <h3 className="">Type of Income</h3>
+                        <h3 className="">Type of transaction</h3>
                         <input
                             value={purpus}
                             onChange={ e => setPurpus(e.target.value)}
