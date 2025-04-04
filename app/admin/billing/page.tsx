@@ -1,212 +1,35 @@
 import PaginationComponent from '@/components/paginate/Paginate'
+import prismaDB from '@/prisma/pot';
 import React from 'react'
 
-interface payedUser{
-  id:string;
+interface paymentHistory{
   userName:string;
-  invoice:number;
-  receved:number;
-  methord:string;
-  branch:string;
+  amount:number;
+  transactionType:string;
+  puspes:string;
   date:string;
-  remark:string;
 }
 
-const getPayment:payedUser[] = [
-  {
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },{
-    invoice:23,
-    id:"lskd",
-    userName:"kdkal",
-    receved:2000,
-    methord:"Bkash",
-    branch:"Jarayangonj",
-    date:"10-02-2024",
-    remark:"Sakib"
-  },
-]
 
-const page = () => {
+const page = async () => {
+  const paymentHistory: paymentHistory[] = (await prismaDB.transaction.findMany()).map(data => ({
+    userName: data.userName,
+    amount: data.amount,
+    transactionType: data.transactionType,
+    puspes: data.puspes,
+    date: new Date(data.date).toLocaleDateString() // Convert Date to string
+}));
+
   return (
     <div>
       <section className='w-full max-w-[1600px] p-6 mx-auto'>
-        <PaginationComponent<payedUser>
+        <PaginationComponent<paymentHistory>
           addUserButton={false}
           paginateTitle='Billing'
           // add a get paymet resite layter
           action={{view:true,delete:true}}
-          fields={["Invoice","ID","UserName","Received","Transaction","Branch","Data","Remark"]}
-          allData={getPayment}
+          fields={["UserName","Amount","Methord Name","Puspes","Data"]}
+          allData={paymentHistory}
           key={"Billing"}
         />
       </section>
