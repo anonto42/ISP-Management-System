@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FaServer } from "react-icons/fa6";
+import { FaServer, FaUsersGear } from "react-icons/fa6";
 import { MdOutlineSupervisedUserCircle } from "react-icons/md";
 import { TbCoinTaka } from "react-icons/tb";
 import { MdOutlineMessage } from "react-icons/md";
@@ -350,27 +350,6 @@ const SideBar = () => {
                 }
             </div>
 
-            {/* Payment */}
-            <div
-                key={"Payment"} 
-                className={
-                section.index === 6? 'icon-box border-b-2 bg-[#00000033] border-[#dadef5]':"icon-box"
-            }>
-                <Link href={"/admin/payment"}>
-                    <div className='w-full h-full flex justify-between lg:mr-11'
-                        onClick={()=>{
-                        setSection({index:6,innerIndex:undefined});
-                        setBar(true)
-                    }}
-                    >
-                        <div className='flex items-center'>
-                            <MdOutlinePayments />
-                            <h4 className='text-xl ml-2 hidden lg:block'>Payment</h4>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-
             {/* Resellers */}
             <div 
                 key={"Resellers"}
@@ -384,7 +363,7 @@ const SideBar = () => {
                 }}
                 >
                     <div className='flex items-center'>
-                        <PiTarget />
+                        <FaUsersGear />
                         <h4 className='text-xl ml-2 hidden lg:block'>Resellers</h4>
                     </div>
                     {
