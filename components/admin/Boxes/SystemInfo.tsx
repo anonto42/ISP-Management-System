@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import os from "os";
 
 interface serverInfo{
     title: string;
@@ -12,26 +13,31 @@ const serverInformation: serverInfo[] = [
     },
     {
         title:"Uptime",
-        data: Date.now()
+        data: os.uptime()
+    },
+    {
+        title:"Total Memory",
+        data: (os.totalmem() / (1024 * 1024 * 1024)).toFixed(2) + " GB"
     },
     {
         title:"Free Memory",
-        data: "0.00023002 GB"
+        data: (os.freemem() / (1024 * 1024 * 1024)).toFixed(2) + " GB"
     },
     {
         title:"CPU",
-        data: "50%"
+        data: os.loadavg()[0].toFixed(2) + " %"
     },
     {
         title:"Board-name",
-        data: "Server_pc"
+        data: os.hostname()
     },
 ]
 
 
 const SystemInfo = () => {
+
   return (
-    <div className='w-auto h-[400px] bg-[#efecec] p-4 text-black shadow-md'>
+    <div className='w-auto h-[460px] bg-[#efecec] p-4 text-black shadow-md'>
         <h1 className='font-semibold text-xl'>Server</h1>
         <div className='w-full mt-5'>
             {
