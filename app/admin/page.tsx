@@ -15,6 +15,8 @@ import DeshboardInfoItem from '@/components/admin/Boxes/DeshboardInfoItem';
 import Graph from '@/components/graph/Graph';
 import SystemInfo from '@/components/admin/Boxes/SystemInfo';
 import PaginationComponent from '@/components/paginate/Paginate';
+import prismaDB from '@/prisma/pot';
+import { verifyToken } from '@/lib/session';
 
 export interface renderData{
   icon:IconType;
@@ -24,7 +26,37 @@ export interface renderData{
   iconBoxColor: string;
 }
 
-const dataObject:renderData[] = [
+const AdminDeshboard = async () => {
+  const accounts = await prismaDB.user.findMany();
+  const FTP = await prismaDB.servers.findMany();
+  const packages = await prismaDB.packages.findMany();
+  const currentUser = await verifyToken();
+
+  const paymentHistory = (await prismaDB.transaction.findMany()).map(data => ({
+    userName: data.userName,
+    amount: data.amount,
+    transactionType: data.transactionType,
+    puspes: data.puspes,
+    date: new Date(data.date).toISOString().split("T")[0]
+  }));
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const admin = currentUser? accounts.filter( accounts => accounts.id === currentUser.id )[0] : [][0]
+  const customers = accounts.filter( doc => doc.userType !== "admin" );
+  const resellersCount = accounts.filter(user => user.userType === "reseller");
+
+  const expens = paymentHistory.filter( doc => doc.transactionType === "expense"  && new Date(doc.date).toISOString().split("T")[0] === today ).reduce((sum, doc) => sum + doc.amount, 0);
+
+  const income = paymentHistory
+  .filter(doc => doc.date === today)
+  .reduce((sum, doc) => sum + doc.amount, 0);
+
+  const toDaysAllTranscictions = paymentHistory.filter( doc => new Date(doc.date).toISOString().split("T")[0] === today );
+
+console.log(toDaysAllTranscictions)
+
+  const dataObject:renderData[] = [
   {
     icon:CiWifiOn,
     title:"Active User",
@@ -35,82 +67,65 @@ const dataObject:renderData[] = [
   {
     icon:TbUsersGroup,
     title:"Total Customers",
-    count:2,
+    count:customers.length,
     iconColor:"#4ac900",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:TbCoinTaka,
     title:"Today's expense",
-    count:0,
+    count:expens,
     iconColor:"#bf7300",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:RiWallet3Line,
     title:"Today's Income",
-    count:1000,
+    count:income,
     iconColor:"#4ac900",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:CiServer,
     title:"FTP Server",
-    count:10,
+    count:FTP.length,
     iconColor:"#4ac900",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:FiUsers,
     title:"Resellers",
-    count:5,
+    count:resellersCount.length,
     iconColor:"#cf0404",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:TbPackages,
     title:"Packages",
-    count:2,
+    count:packages.length,
     iconColor:"#4ac900",
     iconBoxColor:"#f5f3f0"
   },
   {
     icon:IoDocumentTextOutline,
     title:"Invoice today",
-    count:0,
+    count:toDaysAllTranscictions.length,
     iconColor:"#f77e05",
     iconBoxColor:"#f5f3f0"
   },
-]
+  ]
 
-interface user {
-  id: string;
-  name: string;
-  userName:string;
-  password:string;
-  mobile:string;
-  expire:string;
-}
 
-const usersData:user[] = [
-  { id: "1", name: "John Doe", userName:"jodeo",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
-  { id: "2", name: "Sohidul islam", userName:"anonto",password:"anonto1212",mobile:"01990579274",expire:"10-02-2025" }, 
-  { id: "3", name: "Jon kori", userName:"johan",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
-  { id: "4", name: "Pori moni", userName:"pori",password:"kddkss",mobile:"01990579274",expire:"10-02-2025"}, 
-  { id: "5", name: "Jannat jannatul", userName:"jan12",password:"kddkss",mobile:"01990579274",expire:"10-02-2025" }, 
-];
-
-const AdminDeshboard = () => {
   return (
     <div className='w-full h-full text-white'>
 
       <section className='flex flex-col md:flex-row justify-between items-center py-4 w-full px-4 xl:mb-[40px]'>
         <div className='text-center md:text-start'>
           <h1 className='lg:text-3xl text-2xl font-semibold'>Deshboard</h1>
-          <h4 className='lg:text-xl text-lg'>Welcome {" md: user name"}</h4>
+          <h4 className='lg:text-xl text-lg'>Welcome {admin.fullName}</h4>
         </div>
         <div>
-          <Link href={""}>
+          <Link href={"/admin/customers/addnew"}>
             <button className='flex mt-4 lg:mt-0 items-center py-2 px-4 border gap-3 rounded-xl bg-[#0051ff23] shadow shadow-[#00000070] active:scale-95 duration-150 ease-in-out'>
               <CiSquarePlus/>
               <span>Add Customer</span>
@@ -133,14 +148,14 @@ const AdminDeshboard = () => {
       </section>
 
       <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 pb-10'>
-        <PaginationComponent<user>
-          allData={usersData}
+        <PaginationComponent
+          allData={paymentHistory}
           action={{
             delete:true,
             edite: true
           }}
           paginateTitle='Bill paid today'
-          fields={["User ID","Full name","User name","Password","Mobile","Expire"]}
+          fields={["UserName","Amount","Methord Name","Puspes","Data"]}
           addUserButton
           key={"Deshboard for admin main home page"}
         />
