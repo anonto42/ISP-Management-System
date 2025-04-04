@@ -1,9 +1,9 @@
 import PaginationComponent from '@/components/paginate/Paginate';
+import prismaDB from '@/prisma/pot';
 import React from 'react';
 
 
 interface user{
-  id:string;
   userName:string;
   password:string;
   mobile:string;
@@ -11,83 +11,17 @@ interface user{
   expire:string;
 }
 
-const allUser:user[] = [
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  {
-    id:"213213kk",
-    userName:"sakin24",
-    password:"skslks",
-    mobile:"010929920019",
-    clientInfo:"Skaliblul isllam",
-    expire:"10-10-2025",
-  },
-  
-]
+const page = async () => {
 
-const page = () => {
+  const allUser = await prismaDB.user.findMany();
+
+  const formattedUsers:user[] = allUser.filter( doc => doc.userType !== "admin" ).map(user => ({
+    userName: user.userName,
+    password: user.password,
+    mobile: user.phoneNumber,
+    clientInfo: `${user.district}, ${user.upozala}`, // You can adjust this as needed
+    expire:user.dateOfConnection.toLocaleDateString(), // Format the date as needed
+  }));
 
   return (
     <div className='w-full h-full'>
@@ -95,8 +29,8 @@ const page = () => {
         <PaginationComponent<user>
           paginateTitle='All Customers'
           action={{view:true,delete:true,edite:true}}
-          fields={["User ID","User Name","password","Mobile","Client Info","Expire"]}
-          allData={allUser}
+          fields={["User Name","password","Mobile","Client Info","Expire"]}
+          allData={formattedUsers}
           addUserButton
           key={"All cuntomers"}
         />
