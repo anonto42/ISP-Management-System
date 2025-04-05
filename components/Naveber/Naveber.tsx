@@ -15,7 +15,7 @@ const Naveber = () => {
     const logOutHandailer = async () => {
         try {
     
-          const { data } = await axios.delete("/api/auth",{withCredentials:true});
+            await axios.delete("/api/auth",{withCredentials:true});
           window.location.reload();
           
         } catch (error) {
