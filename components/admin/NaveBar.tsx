@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaCircleUser } from "react-icons/fa6";
 import { IoLogOut } from "react-icons/io5";
+import axios from 'axios';
 
 const NaveBar = () => {
   const [profileBar,setProfileBare] = useState(true);
@@ -29,15 +30,21 @@ export default NaveBar
 
 export function ProfileOptionBar({isOrNot}:{isOrNot:boolean}){
 
-  const logOutHandailer = ():void => {};
+  const logOutHandailer = async () => {
+    try {
+
+      const { data } = await axios.delete("/api/auth",{withCredentials:true});
+      window.location.reload();
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return(
-    <nav className={`absolute w-[120px] ${ isOrNot?"h-0":"h-[130px]"} bg-[#8598c48c] right-0 top-14 text-center text-white overflow-clip ease-linear duration-100 shadow-sm shadow-[#0000005b] rounded-2xl`}>
-      <Link href={"/profile"}>
-        <h1 className='text-xl font-semibold py-2 active:bg-[#47474757]'>Profile</h1>
-      </Link>
-      <Link href={"/profile/log"}>
-        <h3 className='text-lg font-medium pb-2 border-y pt-1 active:bg-[#47474757]'>log</h3>
+    <nav className={`absolute w-[120px] ${ isOrNot?"h-0":"h-[90px]"} bg-[#353535] z-20 right-0 top-14 text-center text-white overflow-clip ease-linear duration-100 shadow-sm shadow-[#0000005b] rounded-2xl`}>
+      <Link href={"/admin"}>
+        <h1 className='text-xl font-semibold py-2 active:bg-[#47474757]'>Home</h1>
       </Link>
       <div 
         onClick={()=>logOutHandailer()}

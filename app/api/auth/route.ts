@@ -2,6 +2,7 @@ import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcryptjs';
 import { createToken } from "@/lib/session";
+import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
     try {
@@ -97,5 +98,43 @@ export async function POST(req: NextRequest) {
         );
     } finally {
         prismaDB.$disconnect();
+    }
+}
+
+export async function DELETE(req: NextRequest) {
+    try {
+        const cookie = await cookies();
+        if (!cookie?.has('idmsq')) {
+            return NextResponse.json(
+                {
+                    message: "You are already not logined",
+                    success: false
+                },{
+                    status: 500
+                }
+            )
+        }
+        const token = cookie?.set('idmsq',"")
+        console.log(token)
+
+        return NextResponse.json(
+            {
+                message: "Logged out successfully!",
+                success: true
+            },{
+                status:200
+            }
+        )
+        
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json(
+            {
+                message: "Server Problem!",
+                success: false
+            },{
+                status: 500
+            }
+        )
     }
 }
