@@ -1,49 +1,19 @@
-"use client"
-import { AddSection } from '@/components/admin/Boxes/AddNew';
-import React, { useState } from 'react'
+import prismaDB from '@/prisma/pot';
+import Inner from './Inner';
 
+export interface info{
+  name: string;
+  link: string;
+  id: string;
+ 
+}
 
-const servers = [
-  {
-    link:"http://xnxx.see",
-    name:"Mouvi",
-  },
-  {
-    link:"http://phornhun.tv",
-    name:"Videos",
-  },
-]
-
-const SettiengsPortal = () => {
-  const [addNew,setAddNew]=useState(false);
-
+const SettiengsPortal = async () => {
+  const getServersInfo = await prismaDB.servers.findMany();
+  const serverInfo: info[] = getServersInfo.map( server => ({name: server.name, link: server.url, id: server.id}))
   return (
     <div className='p-6 w-full h-svh relative'>
-      { addNew && <AddSection/> }
-      <section className='mx-auto max-w-[1600px] min-w-[700px] overflow-x-auto p-6 bg-[white] shadow-lg'>
-        <div className='border-b border-[#cacaca] py-2 flex justify-between items-center'>
-          <h1 className='text-xl'>
-            FTP
-          </h1>
-          <button onClick={()=>setAddNew(!addNew)} className='px-4 py-2 bg-green-600 font-semibold text-white'>Add new</button>
-        </div>
-
-        <div className='mt-3'>
-          <h2 className='text-lg'>Existing:</h2>
-          {
-            servers.map((item,index)=>{
-              return(
-                <div key={index} className='mt-3 bg-[#f0f2f7] px-4 py-2 flex justify-between items-center'>
-                  <h1 className='text-lg'>Server Name: <span className='italic font-bold'>{item.name}</span></h1>
-                  <button className='px-4 py-2 ease-linear duration-150 active:scale-95 bg-red-200 text-red-600 rounded-md shadow-sm'>Delete</button>
-                  <h1 className='text-lg'>Server Link: <span className='italic font-bold'>{item.link}</span></h1>
-                </div>
-              )
-            })
-          }
-        </div>
-
-      </section>
+      <Inner servers={serverInfo} />
     </div>
   )
 }
