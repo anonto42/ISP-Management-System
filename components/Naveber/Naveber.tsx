@@ -1,14 +1,28 @@
+"use client"
 import Image from 'next/image'
 import React from 'react'
-import image from "@/public/test-profile.jpg"
 import logo from "@/app/icon.png";
 import { RiDashboardLine } from "react-icons/ri";
 import { FaCcAmazonPay } from "react-icons/fa";
 import { PiMicrosoftPowerpointLogoDuotone } from "react-icons/pi";
 import { MdContactMail } from "react-icons/md";
 import Link from 'next/link';
+import { IoLogOut } from 'react-icons/io5';
+import axios from 'axios';
 
 const Naveber = () => {
+
+    const logOutHandailer = async () => {
+        try {
+    
+          const { data } = await axios.delete("/api/auth",{withCredentials:true});
+          window.location.reload();
+          
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
   return (
     <div className='w- h-[120px]'>
         <nav className='w-full flex px-3 justify-between border-b border-gray-300 py-4'>
@@ -19,12 +33,10 @@ const Naveber = () => {
                     fill
                 />
             </div>
-            <div className='w-[50px] h-[50px] rounded-full overflow-clip relative'>
-                <Image 
-                    src={image}
-                    alt='Logo'
-                    fill
-                />
+            <div className='w-[50px] h-[50px] flex justify-center items-center'>
+                <IoLogOut 
+                    onClick={()=>logOutHandailer()}
+                    className='text-4xl active:scale-95 ease-in-out duration-100 text-white' />
             </div>
         </nav>
         <nav className='flex'>
