@@ -2,7 +2,7 @@ import PaginationComponent from '@/components/paginate/Paginate'
 import prismaDB from '@/prisma/pot';
 import React from 'react'
 
-interface paymentHistory{
+interface paymentH{
   userName:string;
   amount:number;
   transactionType:string;
@@ -12,7 +12,7 @@ interface paymentHistory{
 
 
 const page = async () => {
-  const paymentHistory: paymentHistory[] = (await prismaDB.transaction.findMany()).map(data => ({
+  const paymentHistory: paymentH[] = (await prismaDB.transaction.findMany()).map(data => ({
     userName: data.userName,
     amount: data.amount,
     transactionType: data.transactionType,
@@ -23,7 +23,7 @@ const page = async () => {
   return (
     <div>
       <section className='w-full max-w-[1600px] p-6 mx-auto'>
-        <PaginationComponent<paymentHistory>
+        <PaginationComponent<paymentH>
           addUserButton={false}
           paginateTitle='Billing'
           // add a get paymet resite layter
