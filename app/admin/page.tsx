@@ -149,7 +149,7 @@ const AdminDeshboard = async () => {
 
       <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 pb-10'>
         <PaginationComponent
-          allData={paymentHistory}
+          allData={toDaysAllTranscictions}
           action={{
             delete:true,
             edite: true
