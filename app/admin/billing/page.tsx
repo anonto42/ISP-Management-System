@@ -12,12 +12,13 @@ interface paymentH{
 
 
 const page = async () => {
-  const paymentHistory: paymentH[] = (await prismaDB.transaction.findMany()).map(data => ({
+  const paymentHistory = await prismaDB.transaction.findMany();
+  const data: paymentH[] = paymentHistory.map(data => ({
     userName: data.userName,
     amount: data.amount,
     transactionType: data.transactionType,
     puspes: data.puspes,
-    date: new Date(data.date).toLocaleDateString() // Convert Date to string
+    date: new Date(data.date).toLocaleDateString()
 }));
 
   return (
@@ -29,7 +30,7 @@ const page = async () => {
           // add a get paymet resite layter
           action={{view:true,delete:true}}
           fields={["UserName","Amount","Methord Name","Puspes","Data"]}
-          allData={paymentHistory}
+          allData={data}
           key={"Billing"}
         />
       </section>
