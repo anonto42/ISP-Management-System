@@ -1,4 +1,4 @@
-import { verifyToken } from "@/lib/session";
+import { isAdmin } from "@/lib/session";
 import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        const auth = await verifyToken();
+        const auth = await isAdmin();
         if (!auth) {
             return NextResponse.json(
                 {
