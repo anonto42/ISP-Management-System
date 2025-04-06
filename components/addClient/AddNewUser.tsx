@@ -58,6 +58,7 @@ const AddNewUser = () => {
             formData.append("reSeller", reSeller);
             formData.append("securityDeposit", secouratyDeposit);
             formData.append("picture", pictuer!);
+            formData.append("userType","user");
 
             const { data } = await axios.post("/api/create",formData,{withCredentials:true});
 
