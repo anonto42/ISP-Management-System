@@ -23,3 +23,14 @@ export const verifyToken = async () => {
 
     return payload ? { id: payload.id, role: payload.role } : false;
 };
+
+export const isAdmin = async () => {
+    try {
+        const session = await verifyToken();
+        return session? session.role === "admin" : false;
+        
+    } catch (error) {
+        console.log(error)
+        return false;
+    }
+}
