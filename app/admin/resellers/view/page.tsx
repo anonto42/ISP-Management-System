@@ -1,8 +1,18 @@
 import PaginationComponent from '@/components/paginate/Paginate';
+import prismaDB from '@/prisma/pot';
 import React from 'react';
 
 
-const page = () => {
+const page = async () => {
+  
+  const users = await prismaDB.user.findMany();
+  const resellers = users.filter( user => user.userType === "reseller").map(user => ({
+    userName: user.userName,
+    mobile: user.phoneNumber,
+    email: user.email,
+    balance: user.balance,
+    joiningDate: new Date(user.dateOfConnection).toISOString().split("T")[0]
+  }))
 
   return (
     <div className='w-full h-full'>
@@ -10,9 +20,9 @@ const page = () => {
         <PaginationComponent
           paginateTitle='All Reseller'
           action={{delete:true,edite:true}}
-          fields={["User ID","Full name","Mobile","Email","Balance","Joining Date"]}
+          fields={["User name","Mobile","Email","Balance","Joining Date"]}
           addUserButton={false}
-          allData={[]}
+          allData={resellers}
         />
       </section>
     </div>
