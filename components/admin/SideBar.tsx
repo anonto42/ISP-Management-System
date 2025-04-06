@@ -303,12 +303,12 @@ const SideBar = () => {
                         section.index !== 5 ? "h-0 p-0" : ""
                     } overflow-clip text-lg bg-[#12061915] rounded-lg`}
                     style={{
-                        height: section.index === 5? `135px` : '0',
+                        height: section.index === 5? `95px` : '0',
                         marginTop: section.index === 5? "8px":"0",
                         paddingBottom: section.index === 5? "16px":"0"
                     }}
                     >
-                        {["Income","Expense","Stuff"].map((item, index) => (
+                        {["Income","Expense"].map((item, index) => (
                             <Link key={index} href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}> 
                                 <h4
                                    
@@ -325,11 +325,11 @@ const SideBar = () => {
                         <div 
                             className={`absolute lg:hidden ease-in-out duration-300 w-[150px] ${section.index !== 5? "h-0":""} bg-[#968bfc] top-12 left-21 shadow shadow-[#0000006c] rounded-sm overflow-clip`}
                             style={{
-                                height: section.index === 5 ? `135px` : '0',
+                                height: section.index === 5 ? `90px` : '0',
                             }}
                             >
                             {
-                                ["Income","Expense","Stuff"].map((item,index)=>{
+                                ["Income","Expense"].map((item,index)=>{
                                     return <Link  key={index} href={`/admin/income/${item.toLocaleLowerCase().split(" ").join("")}`}>
                                         <h4 
                                           

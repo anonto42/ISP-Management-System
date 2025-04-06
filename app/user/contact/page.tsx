@@ -1,7 +1,6 @@
 import prismaDB from '@/prisma/pot'
 import React from 'react'
-import { FaCriticalRole, FaRegUser } from 'react-icons/fa6'
-import { HiStatusOnline } from 'react-icons/hi'
+import { FaRegUser } from 'react-icons/fa6'
 import { LuContactRound } from 'react-icons/lu'
 import { MdOutlineMail } from 'react-icons/md'
 
