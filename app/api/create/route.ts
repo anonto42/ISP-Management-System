@@ -1,9 +1,30 @@
+import { isAdmin } from "@/lib/session";
 import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
+import { v2 as cloud, UploadApiResponse } from "cloudinary";
+import streamifier from "streamifier";
 
+cloud.config({
+    cloud_name: process.env.CLD_NAME,
+    api_key: process.env.CLD_API_KEY,
+    api_secret: process.env.CLD_API_SECRET_KEY,
+});
 
 export async function POST(req: NextRequest) {
     try {
+
+        const val = await isAdmin();
+        if (!val) {
+            return NextResponse.json(
+                {
+                    message: "You are not authorized to access this route!",
+                    success: false
+                }, {
+                status: 401
+            }
+            )
+        }
+
         const formData = await req.formData();
         // we will get a image named: picture
         if (!formData) {
@@ -37,12 +58,51 @@ export async function POST(req: NextRequest) {
         const reseller = formData.get("reSeller") as string;
         const securityDeposit = formData.get("securityDeposit") as string;
         const nid = formData.get("nid") as string;
-        const picture = formData.get("picture") as string;
+        const picture = formData.get("picture") as unknown as File;
+        const userType = formData.get("userType") as string;
 
-        console.log({ userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture })
+        if (userType === "admin") {
+            return NextResponse.json(
+                {
+                    message: "You are not alow to do that!",
+                    success: false
+                },{
+                    status: 303
+                }
+            )
+        }
 
+        let imageUrl;
 
-        const allData = { userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture }
+        if (picture.size>0) {
+            const bytes = await picture.arrayBuffer();
+            const bufferFile = Buffer.from(bytes);
+            if (bytes) {
+                const uploadResult = await new Promise((resolve, reject) => {
+                    const uploadStream = cloud.uploader.upload_stream(
+                        {
+                            folder: "isp",
+                            public_id: picture.name,
+                            resource_type: "image",
+                        },
+                        (err, result) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(result as UploadApiResponse);
+                            }
+                        }
+                    );
+                    streamifier.createReadStream(bufferFile).pipe(uploadStream);
+                });
+                imageUrl = (uploadResult as UploadApiResponse).secure_url;
+            }else{
+                imageUrl = ""
+            }
+        }
+    
+
+        const allData = { userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture:imageUrl,userType }
 
         const isExist = await prismaDB.user.findUnique({ where: { userName } });
         if (isExist) {
