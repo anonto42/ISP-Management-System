@@ -36,7 +36,8 @@ model User {
   picture          String   @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
   dateOfConnection DateTime @default(now())
   interNetPackage  String   @default("")
-  userType         String   @default("user")
+  userType         String
+  balance          String   @default("")
 
   // Relation with Transaction
   transactions Transaction[] @relation("UserTransactions")
