@@ -1,11 +1,10 @@
 "use client"
 import Loader from '@/components/loader/Loader';
 import axios, { AxiosError } from 'axios';
-import { redirect } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 
-const page = () => {
+const TopUp = () => {
   const [userName, setUserName] = useState<string>("");
   const [amount, setAmout] = useState<string>("");
   const [paymentDate, setPaymentDate] = useState<Date>();
@@ -88,4 +87,4 @@ const page = () => {
   )
 }
 
-export default page
+export default TopUp
