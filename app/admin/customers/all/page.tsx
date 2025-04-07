@@ -20,7 +20,7 @@ const page = async () => {
     password: user.password,
     mobile: user.phoneNumber,
     clientInfo: `${user.district}, ${user.upozala}`, // You can adjust this as needed
-    expire:user.dateOfConnection.toLocaleDateString(), // Format the date as needed
+    expire:user.expireDate == null ? "0.0.0.0" :user.expireDate?.toLocaleDateString(), // Format the date as needed
   }));
 
   return (
