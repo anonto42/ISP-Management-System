@@ -37,6 +37,13 @@ export async function POST(req: NextRequest) {
                 }
             ) 
         }
+
+        await prismaDB.user.update({
+            where:{ userName },
+            data:{
+                expireDate: new Date(new Date().setMonth(new Date().getMonth() + 1))
+            }
+        })
         
         return NextResponse.json(
             {
