@@ -9,7 +9,7 @@ const NaveBar = () => {
   const [profileBar,setProfileBare] = useState(true);
   
   return (
-    <nav className='w-full h-[55px] bg-[#23232340] shadow absolute'>
+    <nav className='w-full h-[55px] bg-[#23232340] shadow absolute z-50'>
       <div className='w-full h-full flex justify-between items-center px-6'>
         <div></div>
         <div className='relative'>
