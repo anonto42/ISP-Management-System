@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
         }
     
 
-        const allData = { userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture:imageUrl,userType }
+        const allData = { userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture:imageUrl,userType,expireDate:new Date(new Date().setMonth(new Date().getMonth() + 1)) }
 
         const isExist = await prismaDB.user.findUnique({ where: { userName } });
         if (isExist) {

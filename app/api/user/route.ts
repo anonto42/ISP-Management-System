@@ -7,7 +7,6 @@ export async function POST(){}
 export async function GET(){
     try {
         const cookie = await verifyToken();
-        console.log(cookie)
 
         if (!cookie) {
             return NextResponse.json(

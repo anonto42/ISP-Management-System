@@ -117,7 +117,8 @@ const PaginationComponent = <T extends comonAttrivoutes>(
             }
             <h2 className="font-semibold">{"Action"}</h2>
           </div>
-            {currentUsers.map((user,index) => (<SingelShowItem<comonAttrivoutes>
+            {currentUsers.map((user,index) => (
+              <SingelShowItem<comonAttrivoutes>
                 key={index}
                 data={user} 
                 collums={fields.length+1}

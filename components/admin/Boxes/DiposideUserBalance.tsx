@@ -1,11 +1,14 @@
 "use client"
+import { User } from '@prisma/client';
 import React, { SetStateAction } from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const DiposideUserBalance = ({
-    setPosition
+    setPosition,
+    user
 }:{
-    setPosition: React.Dispatch<SetStateAction<boolean>>
+    setPosition: React.Dispatch<SetStateAction<boolean>>,
+    user: User
 }) => {
 
 

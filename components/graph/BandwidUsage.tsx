@@ -1,11 +1,14 @@
 "use client"
+import { User } from '@prisma/client'
 import React, { SetStateAction } from 'react'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 const BandwidUsage = ({
-    setPosition
+    setPosition,
+    user
 }:{
-    setPosition: React.Dispatch<SetStateAction<boolean>>
+    setPosition: React.Dispatch<SetStateAction<boolean>>,
+    user: User
 }) => {
   return (
     <div className='z-10 absolute top-[50%] left-[50%] w-full h-full bg-[#0000002c] transform -translate-x-[50%] -translate-y-[50%] flex justify-center items-center'>

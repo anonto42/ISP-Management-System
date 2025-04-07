@@ -14,30 +14,31 @@ datasource db {
 }
 
 model User {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  fullName         String   @default("")
-  email            String   @unique
-  phoneNumber      String   @default("")
-  extraNumber      String   @default("")
-  nid              String   @default("")
-  district         String   @default("")
-  upozala          String   @default("")
-  area             String   @default("")
-  houseNo          String   @default("")
-  floorNo          String   @default("")
-  connectivityType String   @default("")
-  wireCode         String   @default("")
-  wireType         String   @default("")
-  userName         String   @unique @default("") // Unique identifier
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  fullName         String    @default("")
+  email            String    @unique
+  phoneNumber      String    @default("")
+  extraNumber      String    @default("")
+  nid              String    @default("")
+  district         String    @default("")
+  upozala          String    @default("")
+  area             String    @default("")
+  houseNo          String    @default("")
+  floorNo          String    @default("")
+  connectivityType String    @default("")
+  wireCode         String    @default("")
+  wireType         String    @default("")
+  userName         String    @unique @default("") // Unique identifier
   password         String
-  referral         String   @default("")
-  reseller         String   @default("")
-  securityDeposit  String   @default("0")
-  picture          String   @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
-  dateOfConnection DateTime @default(now())
-  interNetPackage  String   @default("")
+  referral         String    @default("")
+  reseller         String    @default("")
+  securityDeposit  String    @default("0")
+  picture          String    @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
+  dateOfConnection DateTime  @default(now())
+  expireDate       DateTime?
+  interNetPackage  String    @default("")
   userType         String
-  balance          String   @default("")
+  balance          String    @default("")
 
   // Relation with Transaction
   transactions Transaction[] @relation("UserTransactions")
