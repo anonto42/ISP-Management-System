@@ -66,15 +66,15 @@ export async function POST(req: NextRequest) {
                 {
                     message: "You are not alow to do that!",
                     success: false
-                },{
-                    status: 303
-                }
+                }, {
+                status: 303
+            }
             )
         }
 
         let imageUrl;
 
-        if (picture.size>0) {
+        if (picture.size > 0) {
             const bytes = await picture.arrayBuffer();
             const bufferFile = Buffer.from(bytes);
             if (bytes) {
@@ -96,13 +96,37 @@ export async function POST(req: NextRequest) {
                     streamifier.createReadStream(bufferFile).pipe(uploadStream);
                 });
                 imageUrl = (uploadResult as UploadApiResponse).secure_url;
-            }else{
+            } else {
                 imageUrl = ""
             }
         }
-    
 
-        const allData = { userName, email, phoneNumber, fullName, extraNumber, interNetPackage, district, upozala, area, houseNo, floorNo, password, dateOfConnection, connectivityType, referral, wireCode, wireType, reseller, securityDeposit, nid, picture:imageUrl,userType,expireDate:new Date(new Date().setMonth(new Date().getMonth() + 1)) }
+
+        const allData = {
+            userName,
+            email,
+            phoneNumber,
+            fullName,
+            extraNumber,
+            interNetPackage,
+            district,
+            upozala,
+            area,
+            houseNo,
+            floorNo,
+            password,
+            dateOfConnection,
+            connectivityType,
+            referral,
+            wireCode,
+            wireType,
+            reseller,
+            securityDeposit,
+            nid,
+            userType,
+            picture: imageUrl?.trim() ? imageUrl : "https://res.cloudinary.com/ddsnont4o/image/upload/v1725253663/vbxpip1zbmceklphph7m.png",
+            expireDate: new Date(new Date().setMonth(new Date().getMonth() + 1))
+        }
 
         const isExist = await prismaDB.user.findUnique({ where: { userName } });
         if (isExist) {
