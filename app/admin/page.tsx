@@ -151,12 +151,11 @@ const AdminDeshboard = async () => {
         <PaginationComponent
           allData={toDaysAllTranscictions}
           action={{
-            delete:true,
-            edite: true
+            delete:true
           }}
           paginateTitle='Bill paid today'
           fields={["UserName","Amount","Methord Name","Puspes","Data"]}
-          addUserButton
+          addUserButton={false}
           key={"Deshboard for admin main home page"}
         />
       </section>
