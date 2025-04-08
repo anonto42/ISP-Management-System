@@ -2,12 +2,9 @@ import { verifyToken } from "@/lib/session"
 import prismaDB from "@/prisma/pot";
 import { NextResponse } from "next/server";
 
-export async function POST(){}
-
 export async function GET(){
     try {
         const cookie = await verifyToken();
-
         if (!cookie) {
             return NextResponse.json(
                 {
@@ -61,5 +58,7 @@ export async function GET(){
                 status: 500
             }
         );
+    } finally {
+        await prismaDB.$disconnect();
     }
 }

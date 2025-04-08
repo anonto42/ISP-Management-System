@@ -80,6 +80,7 @@ export async function POST(req: NextRequest) {
                 status: 501
             }
         )
-        
+    }  finally {
+        await prismaDB.$disconnect();
     }
 }

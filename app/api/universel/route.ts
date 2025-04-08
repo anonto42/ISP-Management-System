@@ -1,5 +1,5 @@
 import { isAdmin } from "@/lib/session"
-import { deleteRecord } from "@/prisma/pot";
+import prismaDB, { deleteRecord } from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -63,5 +63,7 @@ export async function POST(req: NextRequest){
                 status:500
             }
         )
+    }  finally {
+        await prismaDB.$disconnect();
     }
 }

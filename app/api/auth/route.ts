@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
             }
         );
     } finally {
-        prismaDB.$disconnect();
+        await prismaDB.$disconnect();
     }
 }
 

@@ -1,9 +1,22 @@
+import { isAdmin } from "@/lib/session";
+import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 import Twilio from "twilio";
 
 
 export async function POST (req: NextRequest){
     try {
+        const instanc = await isAdmin();
+        if (!instanc) {
+            return NextResponse.json(
+                {
+                    message:"You are not authorized to acces this route!",
+                    success:false
+                },{
+                    status:305
+                }
+            )
+        }
         const { number , message } = await req.json();
         if (!number.trim() || !message.trim()) {
             return NextResponse.json({
@@ -43,5 +56,7 @@ export async function POST (req: NextRequest){
     } catch (error) {
         console.log(error)
         return NextResponse.json({success:false,message:"This is an server error chack all think!"},{status:500})
+    } finally {
+        await prismaDB.$disconnect();
     }
 }

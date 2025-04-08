@@ -1,10 +1,20 @@
+import { isAdmin } from "@/lib/session";
 import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 
-
-
 export async function POST(req: NextRequest) {
     try {
+        const instanc = await isAdmin();
+        if (!instanc) {
+            return NextResponse.json(
+                {
+                    message:"You are not authorized to acces this route!",
+                    success:false
+                },{
+                    status:305
+                }
+            )
+        }
         const { amount, type, purpes, date, receved, userName } = await req.json();
         if (!amount || !type.trim() || !purpes.trim() || !date.trim) {
             return NextResponse.json(
@@ -64,5 +74,7 @@ export async function POST(req: NextRequest) {
                 status: 500
             }
         ) 
+    }  finally {
+        await prismaDB.$disconnect();
     }
 }
