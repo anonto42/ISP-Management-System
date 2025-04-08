@@ -42,10 +42,6 @@ const SingelShowItem = <T extends data>({data,collums,acction,getRefresher}:prop
 
             const axiosData = await axios.post("/api/universel",{ id: data.id, modelName:data.modelName },{withCredentials:true});
 
-            console.log(axiosData.data)
-            toast.success(`${axiosData.data.message}`)
-            setLoading(false)
-
             if(getRefresher){
                 getRefresher(prevCount => {
                     const newCount = prevCount + 2;
@@ -53,6 +49,9 @@ const SingelShowItem = <T extends data>({data,collums,acction,getRefresher}:prop
                     return newCount;
                   })
             }
+            toast.success(`${axiosData.data.message}`)
+            setLoading(false)
+
             
         } catch (error) {
             console.log("this is the error from promis: "+error)
