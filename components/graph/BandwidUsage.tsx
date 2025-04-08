@@ -10,6 +10,8 @@ const BandwidUsage = ({
     setPosition: React.Dispatch<SetStateAction<boolean>>,
     user: User
 }) => {
+    const userInfo = user;
+    console.log(userInfo);
   return (
     <div className='z-10 absolute top-[50%] left-[50%] w-full h-full bg-[#0000002c] transform -translate-x-[50%] -translate-y-[50%] flex justify-center items-center'>
             <div className='w-[35vh] h-[60vh] sm:w-[60vh] rounded-sm mx-auto bg-[#F7F7F7]'>
