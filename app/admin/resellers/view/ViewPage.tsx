@@ -1,6 +1,5 @@
 "use client"
 import Loader from '@/components/loader/Loader'
-import AddInvoice from '@/components/paginate/AddInvoice'
 import PaginationComponent from '@/components/paginate/Paginate'
 import { User } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
