@@ -2,20 +2,23 @@
 import Loader from '@/components/loader/Loader';
 import { User } from '@prisma/client';
 import axios, { AxiosError } from 'axios';
-import React, { SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { toast } from 'react-toastify';
 
 const DiposideUserBalance = ({
     setPosition,
-    user
+    user,
+    setResresh
 }:{
     setPosition: React.Dispatch<SetStateAction<boolean>>,
-    user: User
+    user: User,
+    setResresh: Dispatch<SetStateAction<number>>
 }) => {
     const [loading,setLoading]=useState<boolean>(false);
     const [amout,setAmount] = useState<string>("");
     const [trang,setTrang] = useState<string>("");
+    const [count,setcount] = useState<number>(0);
     const [invoiceType] = useState<string>("income")
 
     const handerUpload = async () => {
@@ -37,6 +40,13 @@ const DiposideUserBalance = ({
             setLoading(false);
       
             toast.success(data.message);
+
+            setResresh( prevCount => {
+                const newCount = prevCount + 2;
+                setResresh(newCount + 1); // Update based on new count value
+                return newCount;
+              });
+
             setPosition(false);
       
           } catch (error) {
