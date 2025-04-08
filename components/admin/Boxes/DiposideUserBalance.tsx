@@ -18,7 +18,6 @@ const DiposideUserBalance = ({
     const [loading,setLoading]=useState<boolean>(false);
     const [amout,setAmount] = useState<string>("");
     const [trang,setTrang] = useState<string>("");
-    const [count,setcount] = useState<number>(0);
     const [invoiceType] = useState<string>("income")
 
     const handerUpload = async () => {
