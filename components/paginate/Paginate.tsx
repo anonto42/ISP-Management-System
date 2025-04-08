@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import SingelShowItem from "./SingelShowItem";
 
 export interface acction{
@@ -20,11 +20,13 @@ interface props<T>{
   paginateTitle:string;
   fields:string[];
   allData:T[];
-  addUserButton:boolean
+  addUserButton:boolean;
+  refresher?:Dispatch<SetStateAction<number>>;
 }
 
 const PaginationComponent = <T extends comonAttrivoutes>(
-  {
+  { 
+    refresher,
     paginateTitle,
     fields,
     action,
@@ -119,6 +121,7 @@ const PaginationComponent = <T extends comonAttrivoutes>(
           </div>
             {currentUsers.map((user,index) => (
               <SingelShowItem<comonAttrivoutes>
+                getRefresher={refresher}
                 key={index}
                 data={user} 
                 collums={fields.length+1}

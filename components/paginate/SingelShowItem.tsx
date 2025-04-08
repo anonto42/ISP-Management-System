@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { MdBlock, MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { FaRegPenToSquare } from "react-icons/fa6";
@@ -13,6 +13,7 @@ interface props<T>{
     data:T;
     collums:number;
     acction:acction;
+    getRefresher?:Dispatch<SetStateAction<number>>
 }
 
 interface data {
@@ -22,9 +23,9 @@ interface data {
 }
 
 
-const SingelShowItem = <T extends data>({data,collums,acction}:props<T>) => {
+const SingelShowItem = <T extends data>({data,collums,acction,getRefresher}:props<T>) => {
     const [loadin,setLoading] = useState<boolean>(false);
-    let freshedData = { ...data };
+    const freshedData = { ...data };
     delete freshedData.id;
     delete freshedData.modelName;
 
@@ -44,6 +45,14 @@ const SingelShowItem = <T extends data>({data,collums,acction}:props<T>) => {
             console.log(axiosData.data)
             toast.success(`${axiosData.data.message}`)
             setLoading(false)
+
+            if(getRefresher){
+                getRefresher(prevCount => {
+                    const newCount = prevCount + 2;
+                    getRefresher(newCount + 1); // Update based on new count value
+                    return newCount;
+                  })
+            }
             
         } catch (error) {
             console.log("this is the error from promis: "+error)
