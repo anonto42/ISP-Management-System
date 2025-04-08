@@ -16,8 +16,10 @@ const page = async () => {
   const data: paymentH[] = paymentHistory.map(data => ({
     userName: data.userName,
     amount: data.amount,
+    id: data.id,
     transactionType: data.transactionType,
     puspes: data.puspes,
+    modelName:"transaction",
     date: new Date(data.date).toLocaleDateString()
 }));
 
@@ -28,7 +30,7 @@ const page = async () => {
           addUserButton={false}
           paginateTitle='Billing'
           // add a get paymet resite layter
-          action={{view:true,delete:true}}
+          action={{delete:true}}
           fields={["UserName","Amount","Methord Name","Puspes","Data"]}
           allData={data}
           key={"Billing"}
