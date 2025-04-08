@@ -10,6 +10,8 @@ const page = async () => {
     userName: user.userName,
     mobile: user.phoneNumber,
     email: user.email,
+    modelName:"user",
+    id:user.id,
     balance: user.balance,
     joiningDate: new Date(user.dateOfConnection).toISOString().split("T")[0]
   }))

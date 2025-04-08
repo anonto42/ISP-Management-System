@@ -7,6 +7,8 @@ const paymentHistory = (await prismaDB.transaction.findMany()).filter( i => i.tr
   amount: data.amount,
   transactionType: data.transactionType,
   puspes: data.puspes,
+  modelName:"transaction",
+  id:data.id,
   date: new Date(data.date).toISOString().split("T")[0]
 })).reverse();
 
