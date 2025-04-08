@@ -1,5 +1,5 @@
 "use client";
-import React, { SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import SingelShowItem from "./SingelShowItem";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -24,6 +24,7 @@ interface props<T>{
   allData:T[];
   addNewInvoice:boolean;
   invoiceType?:"income" | "expense";
+  refresh?: Dispatch<SetStateAction<number>>
 }
 
 const AddInvoice = <T extends comonAttrivoutes>(
@@ -33,7 +34,8 @@ const AddInvoice = <T extends comonAttrivoutes>(
     action,
     allData,
     addNewInvoice,
-    invoiceType = "income"
+    invoiceType = "income",
+    refresh
   }:props<T>) => {
 
   const [search, setSearch] = useState("");
@@ -71,7 +73,7 @@ const AddInvoice = <T extends comonAttrivoutes>(
 
   return (
     <div className="w-full overflow-x-auto">
-    { addNew && <AddNewCount invoiceType={invoiceType} setAddComponent={setAddNew} /> }
+    { addNew && <AddNewCount setRefresh={refresh} invoiceType={invoiceType} setAddComponent={setAddNew} /> }
       <div className="w-full min-w-[800px] bg-[#EFECEC] text-black p-6 shadow-md">
         <div className="mb-4 flex w-full justify-between border-b border-[#d1d1d1b9]">
           <h1 className="font-semibold text-xl pb-2 mb-4 text-start">{paginateTitle}</h1>
@@ -136,6 +138,7 @@ const AddInvoice = <T extends comonAttrivoutes>(
                 data={user} 
                 collums={fields.length+1}
                 acction={action}
+                getRefresher={refresh}
             />))}
           </div>
 
@@ -170,9 +173,11 @@ export default AddInvoice;
 
 export function AddNewCount({
     invoiceType,
-    setAddComponent
+    setAddComponent,
+    setRefresh
 }:{
     setAddComponent: React.Dispatch<SetStateAction<boolean>>,
+    setRefresh?: React.Dispatch<SetStateAction<number>>,
     invoiceType: "income" | "expense"
 }) {
   const [amout,setAmount] = useState<string>();
@@ -198,11 +203,18 @@ export function AddNewCount({
   
         const { data } = await axios.post("/api/transection",income_data);
         
-        console.log(data);
         setLoading(false);
   
         toast.success(data.message);
         setAddComponent(false);
+
+        if(setRefresh){
+          setRefresh(prevCount => {
+              const newCount = prevCount + 2;
+              setRefresh(newCount + 1); // Update based on new count value
+              return newCount;
+            })
+      }
   
       } catch (error) {
         console.log(error);
@@ -229,7 +241,6 @@ export function AddNewCount({
   
         const { data } = await axios.post("/api/transection",income_data);
         
-        console.log(data);
         setLoading(false);
   
         toast.success(data.message);
@@ -249,7 +260,7 @@ export function AddNewCount({
   }
 
     return(
-        <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-[50%] shadow-[#0000005d] shadow-[0px_0px_60px] bg-[#ffffff] rounded-xl sm:w-[600px] md:min-w-[450px] max-w-[700px]">
+        <div className="absolute top-[100%] left-1/2 transform -translate-y-1/2 -translate-x-[50%] shadow-[#0000005d] shadow-[0px_0px_60px] bg-[#ffffff] rounded-xl sm:w-[600px] md:min-w-[450px] max-w-[700px]">
           { loading && <Loader />}
             <div className="p-4 w-full h-full">
                 <h1
