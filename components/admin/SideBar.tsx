@@ -22,7 +22,7 @@ const SideBar = () => {
     const [bar,setBar] = useState(true);
 
   return (
-    <section className='h-svh w-[80px] lg:w-[210px] bg-[#747dad] shadow-[0px_0px_10px_rgba(12,12,12,0.3)] absolute z-10 font-semibold'>
+    <section className='h-svh w-[80px] lg:w-[210px] bg-[#747dad] shadow-[0px_0px_10px_rgba(12,12,12,0.3)] absolute z-50 font-semibold'>
         <div className='w-full h-full'>
         
             {/* Deshboard */}
