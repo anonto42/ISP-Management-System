@@ -7,14 +7,6 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 
-interface user{
-  userName:string;
-  password:string;
-  mobile:string;
-  clientInfo:string;
-  expire:string;
-}
-
 const Section = () => {
     const [counter,setCounter] = useState<number>(0);
     const [loading,setLoading] = useState<boolean>(false);
