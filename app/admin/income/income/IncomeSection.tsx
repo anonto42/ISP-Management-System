@@ -1,7 +1,7 @@
 "use client"
 import Loader from '@/components/loader/Loader'
 import AddInvoice from '@/components/paginate/AddInvoice'
-import { Transaction, User } from '@prisma/client'
+import { Transaction } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
