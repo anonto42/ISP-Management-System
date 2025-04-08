@@ -1,6 +1,5 @@
-import dynamicSchema from "@/lib/dynamicSchema";
 import { isAdmin } from "@/lib/session"
-import prismaDB from "@/prisma/pot";
+import prismaDB, { dynamicSchema } from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 
 
