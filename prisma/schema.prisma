@@ -33,7 +33,7 @@ model User {
   referral         String    @default("")
   reseller         String    @default("")
   securityDeposit  String    @default("0")
-  picture          String    @default("https://cdn.pixabay.com/photo/2013/07/13/12/33/man-159847_640.png")
+  picture          String
   dateOfConnection DateTime  @default(now())
   expireDate       DateTime?
   interNetPackage  String    @default("")
