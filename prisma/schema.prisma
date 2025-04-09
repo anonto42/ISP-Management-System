@@ -69,5 +69,6 @@ model Packages {
   title       String @default("")
   price       Float
   description String @default("")
+  mbps        Int
   status      String @default("")
 }
