@@ -76,7 +76,7 @@ function Inner(
 
 
   return (
-    <div>
+    <div className="px-6 pt-6">
       {loading && <Loader />}
       {addNew && <AddSection setRefresh={setCounter} addNew={setAddNew} />}
       <section className='mx-auto max-w-[1600px] min-w-[700px] overflow-x-auto p-6 bg-[white] shadow-md'>
