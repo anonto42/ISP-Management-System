@@ -49,20 +49,21 @@ export async function POST(req: NextRequest) {
                     }
                 );
             }
-        }else{
+        } else {
             const passwordIsCorrect = password === user.password;
             if (!passwordIsCorrect) {
-                    return NextResponse.json(
-                        {
-                            message: "Incorrect password!",
-                            success: false
-                        },
-                        {
-                            status: 403
-                        }
-                    );
+                return NextResponse.json(
+                    {
+                        message: "Incorrect password!",
+                        success: false
+                    },
+                    {
+                        status: 403
+                    }
+                );
             }
         }
+        
 
         const token = await createToken(
             {
