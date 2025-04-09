@@ -19,7 +19,6 @@ const ManagePackages = () => {
         mbps
       };
       const { data } = await axios.post("/api/create/package",sendData,{withCredentials:true});
-      console.log(data);
       toast.success(data.message);
       setTitle("");
       setPrice("");
