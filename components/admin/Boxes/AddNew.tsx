@@ -6,8 +6,10 @@ import { toast } from 'react-toastify';
 
 export function AddSection(
   {
-    addNew
+    addNew,
+    setRefresh
   }:{
+    setRefresh: Dispatch<SetStateAction<number>>;
     addNew: Dispatch<SetStateAction<boolean>>
   }
 ){
@@ -27,6 +29,11 @@ export function AddSection(
           const { data } = await axios.post('/api/create/ftp',{name, serverLink});
           setLoading(false);
           addNew(false);
+          setRefresh( counter => {
+            const count = counter + 1
+            setRefresh( count + 1 )
+            return count
+          })
           toast.success(data.message);
       } catch (error) {
           setLoading(false);
@@ -55,9 +62,24 @@ export function AddSection(
           value={serverLink}
           onChange={e=> setServerLink(e.target.value)}
           />
-        <button 
-          onClick={()=>handelSubmit()}
-          className='_btn_ my-4 bg-green-100 flex justify-center items-center border border-green-600 text-green-600'>Add</button>
+        {
+          !name.trim() || !serverLink.trim()?
+            (
+              <button 
+                onClick={()=>addNew(false)}
+                className='_btn_ my-4 rounded-lg bg-red-100 flex justify-center items-center border border-red-600 text-red-600'>
+                  Cancel
+              </button>
+            )
+            :
+            (
+              <button 
+                onClick={()=>handelSubmit()}
+                className='_btn_ my-4 bg-green-100 flex rounded-lg justify-center items-center border border-green-600 text-green-600'>
+                  Add
+              </button>
+            )
+        }
       </div>
     )
   } 
