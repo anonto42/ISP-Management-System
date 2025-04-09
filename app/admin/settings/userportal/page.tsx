@@ -1,10 +1,11 @@
 import Inner from './Inner';
+import Packages from './Packages';
 
-const SettiengsPortal = async () => {
-  
+const SettiengsPortal = () => {
   return (
-    <div className='p-6 w-full h-svh relative'>
+    <div className='w-full h-svh relative'>
       <Inner />
+      <Packages />
     </div>
   )
 }
