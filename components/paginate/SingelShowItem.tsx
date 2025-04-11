@@ -40,7 +40,7 @@ const SingelShowItem = <T extends data>({data,collums,acction,getRefresher}:prop
                 )
             }
 
-            const axiosData = await axios.post("/api/universel",{ id: data.id, modelName:data.modelName },{withCredentials:true});
+            const axiosData = await axios.post("/api/universel",{ id: data.id, modelName:data.modelName, userName: data.userName },{withCredentials:true});
 
             if(getRefresher){
                 getRefresher(prevCount => {
