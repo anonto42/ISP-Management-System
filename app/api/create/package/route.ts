@@ -7,7 +7,7 @@ export async function GET() {
     try {
       const router = await ConnectMikroTik();
       if (router == undefined) {
-          return null
+        return NextResponse.json({},{status:350})
       }
       await router.connect();
   
@@ -19,7 +19,7 @@ export async function GET() {
 
       return NextResponse.json({
         success: true,
-        fromMickrotik: profiles.map((p: any) => ({
+        fromMickrotik: profiles.map((p) => ({
           name: p.name,
           rateLimit: p["rate-limit"]
         })),
@@ -27,6 +27,7 @@ export async function GET() {
       });
   
     } catch (err) {
+      console.log(err)
       return NextResponse.json({
         message: "Error retrieving profiles",
         success: false
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
 
         const router = await ConnectMikroTik();
         if (router == undefined) {
-            return null
+          return NextResponse.json({},{status:350})
         };
 
         await router.connect();
@@ -130,7 +131,7 @@ export async function DELETE(req: NextRequest) {
   try {
     const router = await ConnectMikroTik();
     if (!router) {
-        return null
+      return NextResponse.json({},{status:350})
     }
     await router.connect();
 
@@ -138,7 +139,7 @@ export async function DELETE(req: NextRequest) {
     const profiles = await router.write('/ppp/profile/print');
 
     // 2. Find the profile with the matching name
-    const target = profiles.find((profile: any) => profile.name === title.trim());
+    const target = profiles.find(profile => profile.name === title.trim());
 
     if (!target) {
       await router.close();
