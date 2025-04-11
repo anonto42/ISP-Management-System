@@ -44,7 +44,7 @@ const ManagePackages = () => {
         <input 
           value={title}
           onChange={e => setTitle( e.target.value )}
-          placeholder='Title of the package'
+          placeholder='0M_000K'
           className='set_inp_' 
           type="text"
            />
@@ -58,7 +58,7 @@ const ManagePackages = () => {
           <input 
           value={mbps}
           onChange={e => setMBPS( e.target.value )}
-          placeholder='MBPS'
+          placeholder='MBPS on (0M/000K)'
           className='set_inp_' 
           type="text"
           />
