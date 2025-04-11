@@ -3,6 +3,7 @@ import prismaDB from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloud, UploadApiResponse } from "cloudinary";
 import streamifier from "streamifier";
+import { ConnectMikroTik } from "@/lib/connectMikroTik";
 
 cloud.config({
     cloud_name: process.env.CLD_NAME,
@@ -20,8 +21,19 @@ export async function POST(req: NextRequest) {
                     message: "You are not authorized to access this route!",
                     success: false
                 }, {
-                status: 401
-            }
+                    status: 401
+                }
+            )
+        }
+        const router = await ConnectMikroTik();
+        if (router == undefined) {
+            return NextResponse.json(
+                {
+                    message: "MikroTik was not conneckted!",
+                    success: false
+                }, {
+                    status: 502
+                }
             )
         }
 
@@ -144,10 +156,22 @@ export async function POST(req: NextRequest) {
             data: allData
         })
 
+        const dataForMikrotik: string[] = [
+            `=name=${userName.trim()}`,
+            `=password=${password.trim()}`,
+            `=service=pppoe`,
+            `=profile=${interNetPackage}`
+          ];
+
+          await router.connect();
+          const routerResponse = await router.write("/ppp/secret/add", dataForMikrotik);
+          await router.close();
+          console.log(routerResponse)
+
         return NextResponse.json(
             {
                 message: "User created successfully!",
-                success: true
+                success: true,
             }, {
             status: 200
         }
@@ -160,8 +184,8 @@ export async function POST(req: NextRequest) {
                 message: "Internal Server Error!",
                 success: false
             }, {
-            status: 500
-        }
+                status: 500
+            }
         )
     } finally {
         await prismaDB.$disconnect()
