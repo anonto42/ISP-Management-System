@@ -1,6 +1,6 @@
 import prismaDB from "@/prisma/pot";
 import { User } from "@prisma/client";
-import { RouterOSAPI } from "node-routeros";
+import { RouterOSAPI } from "routeros-client";
 
 export const ConnectMikroTik = async () => {
     try {
