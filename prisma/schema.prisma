@@ -66,9 +66,9 @@ model Servers {
 
 model Packages {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
-  title       String @default("")
+  title       String @default("") @unique
   price       Float
   description String @default("")
-  mbps        Int
+  mbps        String
   status      String @default("")
 }
