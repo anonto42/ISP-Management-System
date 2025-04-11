@@ -3,8 +3,9 @@ import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import Loader from '../loader/Loader';
+import { Packages } from '@prisma/client';
 
-const AddNewUser = () => {
+const AddNewUser = ({packages}:{packages:Packages[] | []}) => {
     const [name,setName] = useState<string>("");
     const [email,setEmail] = useState<string>("");
     const [phone,setPhone] = useState<string>("");
@@ -233,18 +234,22 @@ const AddNewUser = () => {
                     >
                         <option value="">Select type</option>
                         <option value="dynamic">Dynamic</option>
-                        <option value="static">Static</option>
                     </select>
                 </div>
                 <div className='input-box-newCustomer'>
                     <h4 className='lavel_for_Input'>Package</h4>
-                    <input
+                    <select
                         value={netPackage}
                         onChange={e => setPackage(e.target.value)}
-                        required
-                        placeholder='Serial number of the package'
-                        className='input-newCustomer' 
-                        type="text" />
+                        className='input-newCustomer'
+                    >
+                        <option value="">Select type</option>
+                        {
+                            packages.map( (item,index) => {
+                                return <option key={index} value={item.title}>{item.title}</option>
+                            })
+                        }
+                    </select>
                 </div>
                 <div className='input-box-newCustomer'>
                     <h4 className='lavel_for_Input'>Referral</h4>
