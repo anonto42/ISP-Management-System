@@ -33,7 +33,7 @@ const PaginateCo = () => {
       }
     }
     getData()
-  },[0])
+  },[])
 
   const filtredData = users?.map( user => ({
     userName: user.name,
