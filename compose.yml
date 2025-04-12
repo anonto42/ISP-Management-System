@@ -1,28 +1,8 @@
 services:
-  devapp:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4000:3000"
-    environment:
-      NODE_ENV: development
-    env_file:
-      - .env
-    develop:
-      watch:
-        - action: sync
-          path: ./app
-          target: /usr/app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
-
   app:
     build: 
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     env_file:
@@ -30,27 +10,6 @@ services:
     volumes:
       - localSTORAGE:/usr/app
       - /usr/app/node_modules
-
-  mongo:
-    image: mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - localSTORAGE:/app/storage
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: toor
-  
-  mongo-express:
-    image: mongo-express:1.0.2-20-alpine3.19
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: toor
-      ME_CONFIG_MONGODB_URL: mongodb://root:toor@mongo:27017
-      ME_CONFIG_BASICAUTH: false
-
+      
 volumes:
   localSTORAGE:
