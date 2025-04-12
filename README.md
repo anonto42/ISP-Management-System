@@ -1,94 +1,111 @@
 # ISP Management System
 
-A web-based platform for managing ISP users, internet packages, and interacting with MikroTik routers.
-
-## 📦 Package Details
-
-**Name:** `isp-management-system`  
-**Version:** `0.1.0`  
-**Framework:** Next.js with Turbopack  
-**Language:** TypeScript  
-**Styling:** TailwindCSS  
-**Database:** Prisma ORM
+A web-based platform for managing ISP users, internet packages, and interacting with MikroTik routers via API.
 
 ---
 
-## 🚀 How to Run This Project
+## 📆 Project Details
 
-### 1. Clone the repository
+- **Name:** `isp-management-system`  
+- **Version:** `0.1.0`  
+- **Framework:** [Next.js](https://nextjs.org/) with Turbopack  
+- **Language:** TypeScript  
+- **Styling:** TailwindCSS  
+- **Database:** Prisma ORM  
+- **Deployment:** Docker support included
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/anonto42/ISP-Management-System.git
 cd ISP-Management-System
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Set up environment variables
-Rename `.env.sample` to `.env` and fill out the required values.
+### 3. Set Up Environment Variables
 
-### 4. Run the project in development mode
+Rename the `.env.sample` file to `.env` and update the values as needed.
+
+### 4. Start Development Server
+
 ```bash
 npm run dev
 ```
 
 ---
 
-## 🐳 Run with Docker Compose
+## 🛣️ Run with Docker Compose
 
-You can also run this project using Docker Compose:
+You can also run the app using Docker Compose:
 
 ```bash
 docker compose up
 ```
 
----
-
-## ⚠️ Important Notes on MikroTik Connection
-
-Some features will **NOT work** unless MikroTik is connected properly:
-
-- Creating users via the panel  
-- Viewing connected users in real time  
-- Fetching MikroTik packages (internet speed plans)  
-- Creating internet packages
-
-### 🔧 MikroTik Setup Instructions:
-
-1. Assign an IP to your MikroTik device for API access  
-2. Enable the **API service** on MikroTik  
-3. Go to the `/settings/config` page in the project and connect to MikroTik  
-4. You can also use **VirtualBox** to simulate MikroTik if needed
+Make sure Docker is installed and running on your machine.
 
 ---
 
-## 📜 Scripts
+## 🔐 Admin Login (for Testing)
 
-| Script   | Description                                          |
-|----------|------------------------------------------------------|
-| dev      | Start development server using Turbopack             |
-| build    | Generate Prisma client, push DB, and build the app  |
-| start    | Run the Next.js production server                    |
-| lint     | Run ESLint to check for code issues                  |
+> **Important:** This is a default development credential. Please change it before production.
+
+- **Email:** `admin`  
+- **Password:** `admin`
 
 ---
 
-## 🛠️ Main Dependencies
+## ⚠️ MikroTik Integration Notes
 
-- `next` v15.2.2  
-- `react` v18.3.1  
-- `prisma` v6.5.0  
-- `tailwindcss` v4  
-- `routeros-client` for MikroTik API integration  
-- `cloudinary`, `twilio`, `axios`, `bcryptjs`, `react-toastify`, `recharts`, etc.
+This system supports advanced integration with MikroTik routers. Some core features **will not function** unless MikroTik is connected and configured properly:
+
+- Creating users from the dashboard  
+- Viewing real-time connected users  
+- Fetching internet speed plans from MikroTik  
+- Creating MikroTik-based internet packages
+
+### 🔧 MikroTik Configuration Steps
+
+1. Assign a static IP to the MikroTik device for API access  
+2. Enable the **API service** in MikroTik  
+3. Connect MikroTik from the `/settings/config` page  
+4. (Optional) You can simulate MikroTik in development using **VirtualBox**
 
 ---
 
-## 🤝 Contribution
+## 📜 NPM Scripts
 
-Feel free to fork this repo, submit issues or pull requests.
+| Command        | Description                                               |
+|----------------|-----------------------------------------------------------|
+| `npm run dev`  | Start development server with Turbopack                   |
+| `npm run build`| Generate Prisma client, push DB, and build Next.js app   |
+| `npm run start`| Start production server                                   |
+| `npm run lint` | Run ESLint to check for code issues                       |
+
+---
+
+## 🛠️ Dependencies Overview
+
+- **Core:** `next`, `react`, `prisma`, `typescript`, `tailwindcss`
+- **MikroTik API:** `routeros-client`
+- **Utilities:** `axios`, `cloudinary`, `twilio`, `bcryptjs`, `jose`, `date`, `source-map-support`, `streamifier`
+- **UI & Charts:** `react-icons`, `react-toastify`, `react-loader-spinner`, `recharts`
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!  
+Feel free to fork the repository and submit a pull request.
 
 ---
 
@@ -96,3 +113,6 @@ Feel free to fork this repo, submit issues or pull requests.
 
 **Md Sohidul Islam Ananto**  
 GitHub: [@anonto42](https://github.com/anonto42)
+
+---
+
