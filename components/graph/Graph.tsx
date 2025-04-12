@@ -21,7 +21,6 @@ const Graph = ({data}:{data:User[]}) => {
       newUsers: count,
     }));
   })();
-  console.log(formattedUserData)
   return (
     <div className="w-full bg-[#efecec] p-4 text-black shadow-lg h-[460px]">
       <h1 className="font-semibold text-xl mb-4">User increase</h1>
