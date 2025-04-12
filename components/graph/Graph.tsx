@@ -1,21 +1,33 @@
 "use client";
+import { User } from "@prisma/client";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-  { newUsers: 10, date: "2023-03-01" },
-  { newUsers: 20, date: "2023-03-02" },
-  { newUsers: 30, date: "2023-03-03" },
-  { newUsers: 40, date: "2023-03-04" },
-  { newUsers: 50, date: "2023-03-05" },
-];
+type FormattedData = {
+  date: string;
+  newUsers: number;
+};
 
-const Graph = () => {
+const Graph = ({data}:{data:User[]}) => {
+  const formattedUserData: FormattedData[] = (() => {
+    const grouped: Record<string, number> = {};
+  
+    data.forEach((item) => {
+      const formattedDate = new Date(item.dateOfConnection).toISOString().split("T")[0];
+      grouped[formattedDate] = (grouped[formattedDate] || 0) + 1;
+    });
+  
+    return Object.entries(grouped).map(([date, count]) => ({
+      date,
+      newUsers: count,
+    }));
+  })();
+  console.log(formattedUserData)
   return (
     <div className="w-full bg-[#efecec] p-4 text-black shadow-lg h-[460px]">
       <h1 className="font-semibold text-xl mb-4">User increase</h1>
       <div className="w-full h-[88%]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
+          <LineChart data={formattedUserData}>
             <defs>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#00c6ff" stopOpacity={1} />
