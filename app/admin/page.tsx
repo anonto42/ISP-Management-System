@@ -143,7 +143,7 @@ const AdminDeshboard = async () => {
       </section>
 
       <section className='w-full max-w-[1600px] px-6 mx-auto mt-4 gap-4 grid grid-cols-1 lg:grid-cols-2'>
-        <Graph/>
+        <Graph data={accounts}/>
         <SystemInfo/>
       </section>
 
