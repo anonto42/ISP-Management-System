@@ -140,6 +140,17 @@ export async function POST(req: NextRequest) {
             expireDate: new Date(new Date().setMonth(new Date().getMonth() + 1))
         }
 
+        const dataForMikrotik: string[] = [
+            `=name=${userName.trim()}`,
+            `=password=${password.trim()}`,
+            `=service=pppoe`,
+            `=profile=${interNetPackage}`
+          ];
+
+          await router.connect();
+          await router.write("/ppp/secret/add", dataForMikrotik);
+          await router.close();
+
         const isExist = await prismaDB.user.findUnique({ where: { userName } });
         if (isExist) {
             return NextResponse.json(
@@ -155,18 +166,6 @@ export async function POST(req: NextRequest) {
         await prismaDB.user.create({
             data: allData
         })
-
-        const dataForMikrotik: string[] = [
-            `=name=${userName.trim()}`,
-            `=password=${password.trim()}`,
-            `=service=pppoe`,
-            `=profile=${interNetPackage}`
-          ];
-
-          await router.connect();
-          const routerResponse = await router.write("/ppp/secret/add", dataForMikrotik);
-          await router.close();
-          console.log(routerResponse)
 
         return NextResponse.json(
             {
