@@ -1,3 +1,4 @@
+import { ConnectMikroTik } from "@/lib/connectMikroTik";
 import { isAdmin } from "@/lib/session"
 import prismaDB, { deleteRecord } from "@/prisma/pot";
 import { NextRequest, NextResponse } from "next/server";
@@ -18,8 +19,9 @@ export async function POST(req: NextRequest){
             )
         };
 
-        const { id, modelName } = await req.json();
-        if (!id.trim() || !modelName.trim()) {
+
+        const { id, modelName, userName } = await req.json();
+        if (!id.trim() || !modelName.trim() || !userName.trim()) {
             return NextResponse.json(
                 {
                     message: "All fields are requird",
@@ -30,8 +32,43 @@ export async function POST(req: NextRequest){
             )
         };
 
-        const data = await deleteRecord(modelName,id);
+        if(modelName === "user"){
+            const router = await ConnectMikroTik();
+            if (!router) {
+                return NextResponse.json(
+                    {
+                        message:"Mickrotik is not connected",
+                        success:false
+                    },{
+                        status:360
+                    }
+                )
+            }
+            await router.connect();
+    
+            const findUser = await router.write("/ppp/secret/print");
+            const user = findUser.filter( users => users.name === userName )[0];
+            if (!user) {
+                await router.close();
+                return NextResponse.json(
+                    {
+                        message:"User Not Found on mickrotik!",
+                    },
+                    {
+                        status:404
+                    }
+                )
+            }
+            
+            await router.write("/ppp/secret/remove",[
+                `=.id=${user[".id"]}`
+              ])
+    
+            await router.close();
+        }
+
         
+        const data = await deleteRecord(modelName,id);
         if (!data) {
             return NextResponse.json(
                 {
