@@ -60,7 +60,7 @@ const AdminDeshboard = async () => {
   {
     icon:CiWifiOn,
     title:"Active User",
-    count:2,
+    count:0,
     iconColor:"#f77e05",
     iconBoxColor:"#f5f3f0"
   },
